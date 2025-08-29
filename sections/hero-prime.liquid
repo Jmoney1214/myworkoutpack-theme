@@ -1,0 +1,22 @@
+<section class="hero-wrap">
+  <div class="hero-bg" style="background-image:url({{ section.settings.bg | image_url: width: 2400 }})"></div>
+  <div class="page-width hero-inner">
+    <span class="badge">{{ section.settings.kicker }}</span>
+    <h1 style="font-size:44px;line-height:1.1;margin:10px 0">{{ section.settings.heading }}</h1>
+    <p style="font-size:18px;color:#222;margin:0 0 18px">{{ section.settings.subheading }}</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      {% if section.settings.btn_label and section.settings.btn_link %}<a class="btn" href="{{ section.settings.btn_link }}">{{ section.settings.btn_label }}</a>{% endif %}
+      {% if section.settings.btn2_label and section.settings.btn2_link %}<a class="button" href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>{% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}{"name":"Hero Prime","settings":[
+{"id":"bg","type":"image_picker","label":"Background image"},
+{"id":"kicker","type":"text","label":"Kicker","default":"New • Pickleball • Pro"},
+{"id":"heading","type":"text","label":"Heading","default":"Start Your Pickleball Journey"},
+{"id":"subheading","type":"textarea","label":"Subheading","default":"Shop paddles, balls, bags, apparel and more."},
+{"id":"btn_label","type":"text","label":"Primary button label","default":"Shop Best Sellers"},
+{"id":"btn_link","type":"url","label":"Primary button link"},
+{"id":"btn2_label","type":"text","label":"Secondary button label","default":"Build a Bundle"},
+{"id":"btn2_link","type":"url","label":"Secondary button link"}],
+"presets":[{"name":"Hero Prime"}]}{% endschema %}

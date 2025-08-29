@@ -1,0 +1,20 @@
+<section>
+  <div class="page-width grid-4">
+    {% for block in section.blocks %}
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:28px;height:28px;background:var(--brand);border-radius:8px"></div>
+        <div>
+          <strong>{{ block.settings.title }}</strong><br>
+          <span style="color:var(--muted)">{{ block.settings.caption }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}{"name":"USP Bar","blocks":[
+{"type":"usp","name":"USP","settings":[{"id":"title","type":"text","label":"Title","default":"Free Shipping"},{"id":"caption","type":"text","label":"Caption","default":"On orders $50+"}]}],
+"max_blocks":4,"presets":[{"name":"USP Bar","blocks":[
+{"type":"usp","settings":{"title":"Free Shipping","caption":"On orders $50+"}},
+{"type":"usp","settings":{"title":"30-Day Returns","caption":"Hassle-free"}},
+{"type":"usp","settings":{"title":"Secure Checkout","caption":"PCI compliant"}},
+{"type":"usp","settings":{"title":"Fast Delivery","caption":"2–5 days"}}]}]}{% endschema %}

@@ -1,0 +1,14 @@
+<section>
+  <div class="page-width grid-3">
+    {% for block in section.blocks %}
+      <div class="card" style="padding:16px">
+        <div class="review-stars">★★★★★</div>
+        <p style="margin:8px 0 12px">{{ block.settings.quote }}</p>
+        <strong>— {{ block.settings.author }}</strong>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}{"name":"Social Proof","blocks":[
+{"type":"review","name":"Review","settings":[{"id":"quote","type":"textarea","label":"Quote","default":"Best paddle I’ve used this season."},{"id":"author","type":"text","label":"Author","default":"A. Player"}]}],
+"max_blocks":6,"presets":[{"name":"Social Proof","blocks":[{"type":"review"},{"type":"review"},{"type":"review"}]}]}{% endschema %}

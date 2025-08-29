@@ -1,0 +1,29 @@
+:root{--brand:#11a86d;--brand-dark:#0f8c5b;--ink:#111;--muted:#666;--bg:#fff;--bg-alt:#0e0f11;--card:#fff;--border:#e8e8e8}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+h1,h2,h3{letter-spacing:-.02em}
+.btn,.button,button[type=submit]{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--brand);color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:700;cursor:pointer;transition:.15s}
+.btn:hover,.button:hover,button[type=submit]:hover{background:var(--brand-dark)}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#eaf8f2;color:var(--brand);font-size:12px;font-weight:700}
+.page-width{max-width:1200px;margin:0 auto;padding:0 20px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.hero-wrap{min-height:60vh;display:grid;align-items:center;position:relative}
+.hero-bg{position:absolute;inset:0;background-position:center;background-size:cover;opacity:.28}
+.hero-inner{position:relative;z-index:2;padding:48px 0}
+.upsell{border:1px dashed var(--border);border-radius:12px;padding:12px 14px;background:#fcfffa}
+.trust{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0}
+.trust li{list-style:none;color:var(--muted);font-size:14px}
+.review-stars{color:#ffb600;font-size:16px}
+.footer-dark{background:var(--bg-alt);color:#d7d7d7}
+.footer-dark a{color:#d7d7d7;text-decoration:none}
+.footer-dark a:hover{text-decoration:underline}
+.progress{height:8px;background:#eee;border-radius:999px;overflow:hidden}
+.progress>span{display:block;height:8px;background:var(--brand)}
+@media(max-width:990px){
+  .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-3{grid-template-columns:1fr}
+  .hero-inner{padding:28px 0}
+}
