@@ -1,19 +1,20 @@
-<section>
+<section class="section">
   <div class="page-width">
-    <h2 style="margin:10px 0 16px">{{ section.settings.heading }}</h2>
+    <h2>{{ section.settings.heading }}</h2>
     <div class="grid-3">
       {% for block in section.blocks %}
-        <a class="card" href="{{ block.settings.link | default: '#' }}">
+        <a class="product-card" href="{{ block.settings.link | default: '#' }}">
           {% if block.settings.image %}{{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
           <div style="padding:14px">
-            <h3 style="margin:0 0 6px">{{ block.settings.title }}</h3>
+            <h3>{{ block.settings.title }}</h3>
             <p class="upsell">{{ block.settings.caption }}</p>
+            <span class="btn btn--ghost">Shop This Bundle</span>
           </div>
         </a>
       {% endfor %}
     </div>
   </div>
 </section>
-{% schema %}{"name":"Bundle Offers","settings":[{"id":"heading","type":"text","label":"Heading","default":"Pickleball Bundles"}],
-"blocks":[{"type":"bundle","name":"Bundle","settings":[{"id":"image","type":"image_picker","label":"Image"},{"id":"title","type":"text","label":"Title","default":"Starter Bundle"},{"id":"caption","type":"text","label":"Caption","default":"Save 20% vs buying separately"},{"id":"link","type":"url","label":"Link"}]}],
+{% schema %}{"name":"Bundle Offers","settings":[{"id":"heading","type":"text","label":"Heading","default":"Pickleball Bundles — Save up to 20%"}],
+"blocks":[{"type":"bundle","name":"Bundle","settings":[{"id":"image","type":"image_picker","label":"Image"},{"id":"title","type":"text","label":"Title","default":"Starter Bundle"},{"id":"caption","type":"text","label":"Caption","default":"Everything to begin. Save 15%."},{"id":"link","type":"url","label":"Link"}]}],
 "max_blocks":6,"presets":[{"name":"Bundle Offers","blocks":[{"type":"bundle"},{"type":"bundle"},{"type":"bundle"}]}]}{% endschema %}

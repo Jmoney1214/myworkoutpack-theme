@@ -1,0 +1,5 @@
+<div id="sticky-atc" style="position:fixed;left:0;right:0;bottom:-120px;background:#fff;border-top:1px solid var(--border);box-shadow:0 -6px 20px rgba(0,0,0,.08);padding:10px 14px;display:flex;gap:10px;align-items:center;justify-content:space-between;transition:.2s;z-index:98">
+  <div style="display:flex;gap:10px;align-items:center"><strong>{{ product.title }}</strong><span class="pricing">{{ product.selected_or_first_available_variant.price | money }}</span></div>
+  <button type="button" class="btn" onclick="document.querySelector('form[action*=\"cart/add\"]').requestSubmit()">Add to cart</button>
+</div>
+<script>(function(){const b=document.getElementById('sticky-atc');if(!b)return;let s=0;window.addEventListener('scroll',()=>{const y=window.scrollY;if(y>400&&y>s){b.style.bottom='0px'}else if(y<s){b.style.bottom='-120px'}s=y},{passive:true});})();</script>

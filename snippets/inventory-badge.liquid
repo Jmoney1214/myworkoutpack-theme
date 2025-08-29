@@ -1,0 +1,4 @@
+{% assign qty = product.selected_or_first_available_variant.inventory_quantity | default: 0 %}
+<span class="badge" style="{% if qty > 10 %}background:#e7f7ee;color:#0a7a3f{% elsif qty > 0 %}background:#fff7d0;color:#8a6d00{% else %}background:#fdecec;color:#9a1a1a{% endif %}">
+{% if qty > 10 %}In stock{% elsif qty > 0 %}Low stock ({{ qty }}){% else %}Out of stock{% endif %}
+</span>
