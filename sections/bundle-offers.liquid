@@ -3,18 +3,25 @@
     <h2>{{ section.settings.heading }}</h2>
     <div class="grid-3">
       {% for block in section.blocks %}
-        <a class="product-card" href="{{ block.settings.link | default: '#' }}">
+        <a class="card" href="{{ block.settings.link | default: '#' }}">
           {% if block.settings.image %}{{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
-          <div style="padding:14px">
+          <div class="card__in">
             <h3>{{ block.settings.title }}</h3>
             <p class="upsell">{{ block.settings.caption }}</p>
-            <span class="btn btn--ghost">Shop This Bundle</span>
+            <span class="btn btn--outline">Shop This Bundle</span>
           </div>
         </a>
       {% endfor %}
     </div>
   </div>
 </section>
-{% schema %}{"name":"Bundle Offers","settings":[{"id":"heading","type":"text","label":"Heading","default":"Pickleball Bundles — Save up to 20%"}],
-"blocks":[{"type":"bundle","name":"Bundle","settings":[{"id":"image","type":"image_picker","label":"Image"},{"id":"title","type":"text","label":"Title","default":"Starter Bundle"},{"id":"caption","type":"text","label":"Caption","default":"Everything to begin. Save 15%."},{"id":"link","type":"url","label":"Link"}]}],
-"max_blocks":6,"presets":[{"name":"Bundle Offers","blocks":[{"type":"bundle"},{"type":"bundle"},{"type":"bundle"}]}]}{% endschema %}
+{% schema %}{
+  "name":"Bundle Offers",
+  "settings":[{"id":"heading","type":"text","label":"Heading","default":"Pickleball Bundles — Save up to 20%"}],
+  "blocks":[
+    {"type":"bundle","name":"Bundle","settings":[{"id":"image","type":"image_picker","label":"Image"},{"id":"title","type":"text","label":"Title","default":"Starter Bundle"},{"id":"caption","type":"text","label":"Caption","default":"Everything to begin. Save 15%."},{"id":"link","type":"url","label":"Link"}]},
+    {"type":"bundle","name":"Bundle","settings":[{"id":"image","type":"image_picker","label":"Image"},{"id":"title","type":"text","label":"Title","default":"Family Bundle"},{"id":"caption","type":"text","label":"Caption","default":"4 players, 8 balls. Save 18%."},{"id":"link","type":"url","label":"Link"}]},
+    {"type":"bundle","name":"Bundle","settings":[{"id":"image","type":"image_picker","label":"Image"},{"id":"title","type":"text","label":"Title","default":"Pro Bundle"},{"id":"caption","type":"text","label":"Caption","default":"Tournament-ready. Save 20%."},{"id":"link","type":"url","label":"Link"}]}
+  ],
+  "presets":[{"name":"Bundle Offers","blocks":[{"type":"bundle"},{"type":"bundle"},{"type":"bundle"}]}]
+}{% endschema %}

@@ -1,22 +1,45 @@
 <section class="hero-wrap">
-  <div class="hero-bg" style="background-image:url({{ section.settings.bg | image_url: width: 2400 }})"></div>
-  <div class="page-width hero-inner">
-    <span class="badge">{{ section.settings.kicker }}</span>
-    <h1>{{ section.settings.heading }}</h1>
-    <p>{{ section.settings.subheading }}</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      {% if section.settings.btn_label and section.settings.btn_link %}<a class="btn" href="{{ section.settings.btn_link }}">{{ section.settings.btn_label }}</a>{% endif %}
-      {% if section.settings.btn2_label and section.settings.btn2_link %}<a class="button button--secondary" href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>{% endif %}
+  {% if section.settings.bg %}<div class="hero__bg" style="background-image:url({{ section.settings.bg | image_url: width: 2400 }})"></div>{% endif %}
+  <div class="page-width hero__in grid-2">
+    <div>
+      {% if section.settings.kicker %}<span class="badge">{{ section.settings.kicker }}</span>{% endif %}
+      <h1>{{ section.settings.heading }}</h1>
+      {% if section.settings.subheading %}<p>{{ section.settings.subheading }}</p>{% endif %}
+      <ul class="hero__bullets">
+        {% for block in section.blocks %}
+          {% if block.type == 'bullet' %}<li><span class="hero__dot"></span><span>{{ block.settings.text }}</span></li>{% endif %}
+        {% endfor %}
+      </ul>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        {% if section.settings.btn_label and section.settings.btn_link %}<a class="btn" href="{{ section.settings.btn_link }}">{{ section.settings.btn_label }}</a>{% endif %}
+        {% if section.settings.btn2_label and section.settings.btn2_link %}<a class="btn btn--outline" href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>{% endif %}
+      </div>
+      {% if section.settings.upsell %}<p class="upsell">{{ section.settings.upsell }}</p>{% endif %}
+    </div>
+    <div>
+      {% if section.settings.side_img %}{{ section.settings.side_img | image_url: width: 1200 | image_tag: loading: 'lazy', style: 'border-radius:14px' }}{% endif %}
     </div>
   </div>
 </section>
-{% schema %}{"name":"Hero Prime","settings":[
-{"id":"bg","type":"image_picker","label":"Background image"},
-{"id":"kicker","type":"text","label":"Kicker","default":"New • Pickleball • Pro"},
-{"id":"heading","type":"text","label":"Heading","default":"Start Your Pickleball Journey Today"},
-{"id":"subheading","type":"textarea","label":"Subheadline","default":"Bundles, paddles, and gear trusted by players nationwide. Save more, play better."},
-{"id":"btn_label","type":"text","label":"Primary button label","default":"Shop Best Sellers"},
-{"id":"btn_link","type":"url","label":"Primary button link"},
-{"id":"btn2_label","type":"text","label":"Secondary button label","default":"Build a Bundle & Save"},
-{"id":"btn2_link","type":"url","label":"Secondary button link"}],
-"presets":[{"name":"Hero Prime"}]}{% endschema %}
+{% schema %}{
+  "name":"Hero Prime",
+  "settings":[
+    {"id":"bg","type":"image_picker","label":"Background image"},
+    {"id":"side_img","type":"image_picker","label":"Right image (product/lifestyle)"},
+    {"id":"kicker","type":"text","label":"Kicker","default":"New • Pickleball • Pro"},
+    {"id":"heading","type":"text","label":"Heading","default":"Start Your Pickleball Journey Today"},
+    {"id":"subheading","type":"textarea","label":"Subheadline","default":"Bundles, paddles, and gear trusted by players nationwide. Save more, play better."},
+    {"id":"btn_label","type":"text","label":"Primary button label","default":"Shop Best Sellers"},
+    {"id":"btn_link","type":"url","label":"Primary button link"},
+    {"id":"btn2_label","type":"text","label":"Secondary button label","default":"Build a Bundle & Save"},
+    {"id":"btn2_link","type":"url","label":"Secondary button link"},
+    {"id":"upsell","type":"text","label":"Small reassurance note","default":"Free shipping over $50 · 30-day returns"}
+  ],
+  "blocks":[
+    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Free Shipping over $50"}]},
+    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"30-Day Returns"}]},
+    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Secure Checkout"}]},
+    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Fast Delivery (2–5 days)"}]}
+  ],
+  "presets":[{"name":"Hero Prime"}]
+}{% endschema %}
