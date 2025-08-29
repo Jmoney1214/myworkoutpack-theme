@@ -1,20 +1,20 @@
 <section class="section" style="background:var(--bg-sub)">
   <div class="page-width grid-4">
-    {% for block in section.blocks %}
-      <div style="display:flex;gap:10px;align-items:center">
-        <div style="width:28px;height:28px;background:var(--brand);border-radius:8px"></div>
-        <div><strong>{{ block.settings.title }}</strong><br><span style="color:var(--muted)">{{ block.settings.caption }}</span></div>
-      </div>
-    {% endfor %}
+    {% for block in section.blocks %}{% if block.type == 'usp' %}
+    <div style="display:flex;gap:10px;align-items:center">
+      <div style="width:28px;height:28px;background:var(--brand);border-radius:8px"></div>
+      <div><strong>{{ block.settings.title }}</strong><br><span style="color:var(--muted)">{{ block.settings.caption }}</span></div>
+    </div>
+    {% endif %}{% endfor %}
   </div>
 </section>
-{% schema %}{
+{% schema %}
+{
   "name":"USP Bar",
   "blocks":[
-    {"type":"usp","name":"USP","settings":[{"id":"title","type":"text","label":"Title","default":"Free Shipping"},{"id":"caption","type":"text","label":"Caption","default":"On orders $50+"}]},
-    {"type":"usp","name":"USP","settings":[{"id":"title","type":"text","label":"Title","default":"30-Day Returns"},{"id":"caption","type":"text","label":"Caption","default":"Hassle-free"}]},
-    {"type":"usp","name":"USP","settings":[{"id":"title","type":"text","label":"Title","default":"Secure Checkout"},{"id":"caption","type":"text","label":"Caption","default":"PCI & SSL protected"}]},
-    {"type":"usp","name":"USP","settings":[{"id":"title","type":"text","label":"Title","default":"Fast Delivery"},{"id":"caption","type":"text","label":"Caption","default":"2–5 days"}]}
+    {"type":"usp","name":"USP","settings":[{"id":"title","type":"text","label":"Title","default":"Free Shipping"},{"id":"caption","type":"text","label":"Caption","default":"On orders $50+"}]}
   ],
+  "max_blocks":4,
   "presets":[{"name":"USP Bar","blocks":[{"type":"usp"},{"type":"usp"},{"type":"usp"},{"type":"usp"}]}]
-}{% endschema %}
+}
+{% endschema %}

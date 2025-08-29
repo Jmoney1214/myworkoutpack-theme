@@ -6,9 +6,9 @@
       <h1>{{ section.settings.heading }}</h1>
       {% if section.settings.subheading %}<p>{{ section.settings.subheading }}</p>{% endif %}
       <ul class="hero__bullets">
-        {% for block in section.blocks %}
-          {% if block.type == 'bullet' %}<li><span class="hero__dot"></span><span>{{ block.settings.text }}</span></li>{% endif %}
-        {% endfor %}
+        {% for block in section.blocks %}{% if block.type == 'bullet' %}
+        <li><span class="hero__dot"></span><span>{{ block.settings.text }}</span></li>
+        {% endif %}{% endfor %}
       </ul>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         {% if section.settings.btn_label and section.settings.btn_link %}<a class="btn" href="{{ section.settings.btn_link }}">{{ section.settings.btn_label }}</a>{% endif %}
@@ -16,16 +16,15 @@
       </div>
       {% if section.settings.upsell %}<p class="upsell">{{ section.settings.upsell }}</p>{% endif %}
     </div>
-    <div>
-      {% if section.settings.side_img %}{{ section.settings.side_img | image_url: width: 1200 | image_tag: loading: 'lazy', style: 'border-radius:14px' }}{% endif %}
-    </div>
+    <div>{% if section.settings.side_img %}{{ section.settings.side_img | image_url: width: 1200 | image_tag: loading: 'lazy', style: 'border-radius:14px' }}{% endif %}</div>
   </div>
 </section>
-{% schema %}{
+{% schema %}
+{
   "name":"Hero Prime",
   "settings":[
     {"id":"bg","type":"image_picker","label":"Background image"},
-    {"id":"side_img","type":"image_picker","label":"Right image (product/lifestyle)"},
+    {"id":"side_img","type":"image_picker","label":"Right image"},
     {"id":"kicker","type":"text","label":"Kicker","default":"New • Pickleball • Pro"},
     {"id":"heading","type":"text","label":"Heading","default":"Start Your Pickleball Journey Today"},
     {"id":"subheading","type":"textarea","label":"Subheadline","default":"Bundles, paddles, and gear trusted by players nationwide. Save more, play better."},
@@ -36,10 +35,8 @@
     {"id":"upsell","type":"text","label":"Small reassurance note","default":"Free shipping over $50 · 30-day returns"}
   ],
   "blocks":[
-    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Free Shipping over $50"}]},
-    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"30-Day Returns"}]},
-    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Secure Checkout"}]},
-    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Fast Delivery (2–5 days)"}]}
+    {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Free Shipping over $50"}]}
   ],
-  "presets":[{"name":"Hero Prime"}]
-}{% endschema %}
+  "presets":[{"name":"Hero Prime","blocks":[{"type":"bullet"},{"type":"bullet"},{"type":"bullet"},{"type":"bullet"}]}]
+}
+{% endschema %}
