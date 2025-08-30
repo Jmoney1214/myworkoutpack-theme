@@ -288,6 +288,15 @@
       </a>
     </div>
   </header>
+  {%- if section.settings.collections_menu != blank -%}
+    <nav class="collections-bar page-width small-hide" aria-label="Collections">
+      <ul class="collections-bar__list">
+        {%- for link in section.settings.collections_menu.links -%}
+          <li><a class="collections-bar__link" href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
 </{{ header_tag }}>
 
 {%- if settings.cart_type == "notification" -%}
@@ -498,6 +507,12 @@
       "id": "menu",
       "default": "main-menu",
       "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "link_list",
+      "id": "collections_menu",
+      "label": "Collections menu (shown under header)",
+      "info": "Select a menu of collections to display as a white-text strip under the header"
     },
     {
       "type": "select",

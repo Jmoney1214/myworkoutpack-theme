@@ -7,6 +7,7 @@
   --amazon-accent:#ff9900; /* accent */
   --amazon-accent-dark:#e88b00; /* accent hover */
   --amazon-page:#e3e6e6; /* page background */
+  --amazon-light:#4ea8ff; /* light blue header requested */
 }
 html{scroll-behavior:smooth}
 *{box-sizing:border-box}
@@ -62,10 +63,10 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-.header-wrapper{ background:var(--amazon-top)!important; color:#fff }
+.header-wrapper{ background:var(--amazon-light)!important; color:#fff }
 .section-header .header{ max-width:1200px; margin:0 auto; padding:10px 16px }
 .header a, .header__menu-item, .header__icon{ color:#fff }
-.header__inline-menu{ background:var(--amazon-subnav); border-radius:6px; padding:6px 10px; margin-top:8px }
+.header__inline-menu{ background:transparent; border-radius:6px; padding:6px 10px; margin-top:8px }
 .header__inline-menu .list-menu{ gap:8px }
 .header__icons .svg-wrapper svg{ fill:#fff }
 
@@ -76,6 +77,12 @@ body{
 .header__search-inline .field__button{ background:var(--amazon-accent); border-left:1px solid #e2e8f0 }
 .header__search-inline .field__button:hover{ background:var(--amazon-accent-dark) }
 .header__search-inline .svg-wrapper svg{ fill:#111 }
+
+/* Collections bar under header */
+.collections-bar{ background:var(--amazon-light); border-top:1px solid rgba(255,255,255,.2); padding:6px 0 }
+.collections-bar__list{ display:flex; gap:14px; align-items:center; margin:0; padding:0; list-style:none }
+.collections-bar__link{ color:#fff; text-decoration:none; font-weight:700; font-size:14px }
+.collections-bar__link:hover{ text-decoration:underline }
 
 /* Primary action buttons */
 .button, .shopify-payment-button__button--unbranded{ background:var(--amazon-accent); border-color:var(--amazon-accent) }
