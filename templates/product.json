@@ -112,6 +112,7 @@
         "padding_bottom": 12
       }
     },
+    "usp": {"type": "usp-bar", "settings": {}, "blocks": {"1":{"type":"usp"}, "2":{"type":"usp"}, "3":{"type":"usp"}}, "block_order": ["1","2","3"]},
     "image-with-text": {
       "type": "image-with-text",
       "blocks": {
@@ -190,6 +191,7 @@
         "padding_bottom": 36
       }
     },
+    "social-proof": {"type": "social-proof", "settings": {}, "blocks": {"r1":{"type":"review"}, "r2":{"type":"review"}, "r3":{"type":"review"}}, "block_order": ["r1","r2","r3"]},
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -209,8 +211,10 @@
   },
   "order": [
     "main",
+    "usp",
     "image-with-text",
     "multicolumn",
+    "social-proof",
     "related-products"
   ]
 }

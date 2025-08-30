@@ -1,0 +1,149 @@
+/*
+  Conversion-focused brand styles
+  - Fonts: Inter (body), Montserrat (headings)
+  - CTA color: Amazon-like Orange (#FF9900) with accessible hover
+  - Link color: Trust Blue (#007185)
+  - Price and sale colors tuned for clarity and urgency
+*/
+
+:root {
+  /* Brand palette */
+  --brand-text: #111111;
+  --brand-bg: #ffffff;
+  --brand-muted: #6b7280; /* gray-500 */
+  --brand-border: #e5e7eb; /* gray-200 */
+  --brand-cta: #ff9900; /* primary CTA */
+  --brand-cta-hover: #e68a00; /* darker hover */
+  --brand-link: #007185; /* trust blue (Amazon-like) */
+  --brand-link-hover: #005f6a;
+  --brand-sale: #b12704; /* Amazon red */
+  --brand-success: #067d62; /* affirmation green */
+}
+
+/* Typography */
+html, body {
+  background: var(--brand-bg);
+  color: var(--brand-text);
+}
+
+body, input, select, textarea, button {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+h1, h2, h3, h4, .h0, .h1, .h2, .h3, .h4, .hxl, .title, .section-title {
+  font-family: 'Montserrat', 'Inter', system-ui, -apple-system, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Links emphasize clarity and trust */
+a, .link, .link--text {
+  color: var(--brand-link);
+}
+a:hover, .link:hover, .link--text:hover {
+  color: var(--brand-link-hover);
+  text-decoration: underline;
+}
+
+/* Buttons and CTAs */
+.button, button, [type="submit"], .shopify-payment-button__button, .shopify-payment-button__button--unbranded {
+  background-color: var(--brand-cta);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  text-transform: none; /* keep readable, stronger weight handles emphasis */
+  padding: 12px 18px;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+.button:hover, button:hover, [type="submit"]:hover,
+.shopify-payment-button__button:hover, .shopify-payment-button__button--unbranded:hover {
+  background-color: var(--brand-cta-hover);
+}
+.button:active, button:active, [type="submit"]:active {
+  transform: translateY(1px);
+}
+
+/* Secondary buttons: outlined for hierarchy */
+.button--secondary, .button--tertiary {
+  background: #ffffff;
+  color: var(--brand-link);
+  border: 1px solid var(--brand-border);
+}
+.button--secondary:hover, .button--tertiary:hover {
+  border-color: var(--brand-link);
+}
+
+/* Badges and pricing cues */
+.price, .price-item--regular {
+  color: var(--brand-text);
+}
+.price__sale, .price-item--sale {
+  color: var(--brand-sale);
+  font-weight: 700;
+}
+.inventory-badge, .badge, .product__badge {
+  border-radius: 9999px;
+  padding: 4px 10px;
+  font-weight: 600;
+}
+.inventory-badge--low, .badge--warning {
+  background: #fff4e5;
+  color: #8a3b00;
+  border: 1px solid #ffd49a;
+}
+.inventory-badge--in-stock, .badge--success {
+  background: #e6f6f2;
+  color: var(--brand-success);
+  border: 1px solid #bfe7dd;
+}
+
+/* Form affordances */
+input, select, textarea {
+  border-color: var(--brand-border);
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--brand-link);
+  box-shadow: 0 0 0 3px rgba(0, 113, 133, 0.15);
+}
+
+/* Card and section polish */
+.card, .product-card, .collection-card, .quick-add-modal, .drawer, .popup {
+  border-radius: 12px;
+}
+
+/* Sticky ATC emphasis (if theme provides it) */
+.sticky-atc, .sticky-atc .button {
+  background: #ffffff;
+  border-top: 1px solid var(--brand-border);
+}
+.sticky-atc .button--primary {
+  background: var(--brand-cta);
+  color: #fff;
+}
+
+/* Header and announcement clarity */
+.announcement-bar {
+  background: #111111;
+  color: #ffffff;
+}
+.announcement-bar a { color: #ffffff; }
+
+/* Trust microcopy helpers (use in sections/snippets as needed) */
+.trust-list { display: flex; gap: 16px; align-items: center; }
+.trust-list__item { display: flex; gap: 8px; align-items: center; color: var(--brand-muted); }
+
+/* Utilities */
+.u-center { display: flex; align-items: center; justify-content: center; }
+.u-full { width: 100%; }
+.u-hidden { display: none !important; }
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .button, button, [type="submit"] { width: 100%; }
+}
+
