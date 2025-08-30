@@ -232,7 +232,7 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {% render 'header-search-inline', input_id: 'Search-Header-Inline', class: 'small-hide' %}
 
       {%- if shop.customer_accounts_enabled -%}
         <a
