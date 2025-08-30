@@ -66,6 +66,9 @@ body{
 .header-wrapper{ background:var(--amazon-light)!important; color:#fff }
 .section-header .header{ max-width:1200px; margin:0 auto; padding:10px 16px }
 .header a, .header__menu-item, .header__icon{ color:#fff }
+.header__brand-text{ color:#fff; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; font-weight:800; letter-spacing:.2px }
+.header__utility-link{ color:#fff; text-decoration:none; font-weight:700; margin:0 8px; font-size:13px }
+.header__utility-link:hover{ text-decoration:underline }
 .header__inline-menu{ background:transparent; border-radius:6px; padding:6px 10px; margin-top:8px }
 .header__inline-menu .list-menu{ gap:8px }
 .header__icons .svg-wrapper svg{ fill:#fff }
@@ -83,6 +86,8 @@ body{
 .collections-bar__list{ display:flex; gap:14px; align-items:center; margin:0; padding:0; list-style:none }
 .collections-bar__link{ color:#fff; text-decoration:none; font-weight:700; font-size:14px }
 .collections-bar__link:hover{ text-decoration:underline }
+.collections-bar__hamburger{ display:inline-flex; align-items:center; margin-right:10px; color:#fff }
+.collections-bar__hamburger .svg-wrapper svg{ fill:#fff }
 
 /* Primary action buttons */
 .button, .shopify-payment-button__button--unbranded{ background:var(--amazon-accent); border-color:var(--amazon-accent) }
