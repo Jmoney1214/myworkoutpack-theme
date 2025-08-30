@@ -1,9 +1,107 @@
 {
   "sections": {
-    "hero": { "type": "hero-prime", "settings": {} },
-    "usp": { "type": "usp-bar", "settings": {}, "blocks": { "1":{"type":"usp"}, "2":{"type":"usp"}, "3":{"type":"usp"}, "4":{"type":"usp"} }, "block_order": ["1","2","3","4"] },
-    "bundles": { "type": "bundle-offers", "settings": {}, "blocks": { "b1":{"type":"bundle"}, "b2":{"type":"bundle"}, "b3":{"type":"bundle"} }, "block_order": ["b1","b2","b3"] },
-    "proof": { "type": "social-proof", "settings": {}, "blocks": { "r1":{"type":"review"}, "r2":{"type":"review"}, "r3":{"type":"review"} }, "block_order": ["r1","r2","r3"] }
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "image": "",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "color_scheme": "background-1",
+        "show_text_box": true,
+        "text_alignment": "left",
+        "heading": "Labor Day Sale",
+        "heading_size": "h1",
+        "subheading": "Up to 40% off — ends Monday",
+        "button_label_1": "Shop the sale",
+        "button_link_1": "/collections/all",
+        "button_label_2": "",
+        "button_link_2": "",
+        "show_separator": false
+      }
+    },
+    "cats": {
+      "type": "collection-list",
+      "settings": {
+        "title": "Shop popular categories",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "show_view_all": true
+      },
+      "blocks": {
+        "c1": { "type": "collection", "settings": { "collection": "", "title": "Whiskey" } },
+        "c2": { "type": "collection", "settings": { "collection": "", "title": "Tequila" } },
+        "c3": { "type": "collection", "settings": { "collection": "", "title": "Wine" } },
+        "c4": { "type": "collection", "settings": { "collection": "", "title": "Beer & Seltzer" } },
+        "c5": { "type": "collection", "settings": { "collection": "", "title": "Mixers" } },
+        "c6": { "type": "collection", "settings": { "collection": "", "title": "Cigars" } }
+      },
+      "block_order": ["c1","c2","c3","c4","c5","c6"]
+    },
+    "trending": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Trending now",
+        "heading_size": "h2",
+        "description": "",
+        "collection": "",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "enable_desktop_slider": true,
+        "color_scheme": "background-1"
+      }
+    },
+    "promo": {
+      "type": "image-banner",
+      "settings": {
+        "image": "",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "color_scheme": "background-1",
+        "show_text_box": true,
+        "text_alignment": "left",
+        "heading": "Save 15% on designer finds",
+        "heading_size": "h2",
+        "subheading": "Use code WEEKEND",
+        "button_label_1": "Shop designer",
+        "button_link_1": "/collections/all",
+        "show_separator": false
+      }
+    },
+    "beauty": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Fall Beauty & Mixology",
+        "heading_size": "h2",
+        "collection": "",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "enable_desktop_slider": true,
+        "color_scheme": "background-1"
+      }
+    },
+    "rich": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "background-1",
+        "narrow": true,
+        "heading": "Same-day delivery available",
+        "heading_size": "h3",
+        "text": "<p>Serving Sanford to Kissimmee. Placeholder copy — update in Theme Editor.</p>",
+        "button_label": "Learn more",
+        "button_link": "/pages/delivery"
+      }
+    }
   },
-  "order": ["hero","usp","bundles","proof"]
+  "order": ["hero", "cats", "trending", "promo", "beauty", "rich"]
 }

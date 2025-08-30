@@ -1,0 +1,20 @@
+:root{
+  --brand-primary:#0D1B2A;
+  --brand-secondary:#1B263B;
+  --brand-bg:#FFFFFF;
+  --brand-accent:#FF6B6B;
+  --brand-border:#E0E1DD;
+}
+html,body{font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--brand-secondary);background:var(--brand-bg)}
+h1,h2,h3,h4,h5,h6,.h0,.h1,.h2,.h3{font-family:Montserrat,Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--brand-primary);letter-spacing:.2px}
+a{color:var(--brand-primary)}a:hover{opacity:.85}
+.button,.shopify-challenge__button,.customer button,button.shopify-payment-button__button--unbranded{min-height:48px;padding:14px 18px;font-weight:600;letter-spacing:.2px}
+.button--primary,.button:not(.button--secondary):not(.button--tertiary),.shopify-payment-button__button--unbranded{background:var(--brand-accent);color:#fff}
+.button--secondary{background:transparent;color:var(--brand-primary);border:2px solid var(--brand-primary)}
+.button:focus-visible,.shopify-payment-button__button--unbranded:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.button:not([disabled]):hover,.shopify-payment-button__button--unbranded:hover{filter:saturate(1.05) brightness(.98)}
+hr,.divider,.section:after{border-color:var(--brand-border)}
+.card,.product-card,.collection-card{color:var(--brand-secondary)}
+.header-wrapper{position:sticky;top:0;z-index:30;backdrop-filter:saturate(160%) blur(6px)}
+@media(max-width:749px){.header__icons .header__icon--account,.header__icons .header__icon--search{display:none}}
+#sticky-atc{box-shadow:0 -6px 18px rgba(0,0,0,.06)}
