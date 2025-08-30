@@ -1,0 +1,39 @@
+name: Deploy theme to Shopify (staging)
+on:
+  push:
+    branches: [ "dev" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect changed theme files
+        id: diff
+        run: |
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          git diff --name-only HEAD^ HEAD -- \
+            "assets/**" "layout/**" "sections/**" "snippets/**" "templates/**" "config/**" \
+            | sed '/^$/d' >> $GITHUB_OUTPUT || true
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Upload changed files to Shopify
+        if: ${{ steps.diff.outputs.files != '' }}
+        env:
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
+          SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
+        run: |
+          while IFS= read -r file; do
+            [ -f "$file" ] || continue
+            echo "Uploading $file"
+            json=$(jq -Rs . < "$file")
+            curl -sS -X PUT \
+              -H "X-Shopify-Access-Token: $SHOPIFY_ADMIN_TOKEN" \
+              -H "Content-Type: application/json" \
+              "https://$SHOPIFY_STORE/admin/api/${SHOPIFY_API_VERSION}/themes/${SHOPIFY_THEME_ID}/assets.json" \
+              -d "{\"asset\":{\"key\":\"$file\",\"value\":$json}}" \
+            | jq -r '.errors // "ok"'
+          done <<< "${{ steps.diff.outputs.files }}"
