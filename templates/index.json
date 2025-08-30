@@ -4,104 +4,136 @@
       "type": "image-banner",
       "settings": {
         "image": "",
+        "image_2": "",
         "image_overlay_opacity": 0,
         "image_height": "medium",
-        "adapt_height_first_image": false,
+        "image_behavior": "none",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
-        "color_scheme": "background-1",
         "show_text_box": true,
-        "text_alignment": "left",
-        "heading": "Labor Day Sale",
-        "heading_size": "h1",
-        "subheading": "Up to 40% off — ends Monday",
-        "button_label_1": "Shop the sale",
-        "button_link_1": "/collections/all",
-        "button_label_2": "",
-        "button_link_2": "",
-        "show_separator": false
-      }
+        "mobile_content_alignment": "center",
+        "show_text_below": true,
+        "stack_images_on_mobile": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "h": { "type": "heading", "settings": { "heading": "Welcome to Your Store", "heading_size": "h1" } },
+        "t": { "type": "text",    "settings": { "text": "Quality products at great prices." } },
+        "b": { "type": "buttons", "settings": { "button_label_1": "Shop now", "button_link_1": "/collections/all", "button_style_secondary_1": false } }
+      },
+      "block_order": ["h","t","b"]
     },
     "cats": {
       "type": "collection-list",
       "settings": {
-        "title": "Shop popular categories",
+        "title": "Shop by category",
         "heading_size": "h2",
         "image_ratio": "square",
         "columns_desktop": 4,
-        "color_scheme": "background-1",
-        "show_view_all": true
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true
       },
       "blocks": {
-        "c1": { "type": "collection", "settings": { "collection": "", "title": "Whiskey" } },
-        "c2": { "type": "collection", "settings": { "collection": "", "title": "Tequila" } },
-        "c3": { "type": "collection", "settings": { "collection": "", "title": "Wine" } },
-        "c4": { "type": "collection", "settings": { "collection": "", "title": "Beer & Seltzer" } },
-        "c5": { "type": "collection", "settings": { "collection": "", "title": "Mixers" } },
-        "c6": { "type": "collection", "settings": { "collection": "", "title": "Cigars" } }
+        "c1": { "type": "featured_collection", "settings": { "collection": "" } },
+        "c2": { "type": "featured_collection", "settings": { "collection": "" } },
+        "c3": { "type": "featured_collection", "settings": { "collection": "" } },
+        "c4": { "type": "featured_collection", "settings": { "collection": "" } },
+        "c5": { "type": "featured_collection", "settings": { "collection": "" } },
+        "c6": { "type": "featured_collection", "settings": { "collection": "" } }
       },
       "block_order": ["c1","c2","c3","c4","c5","c6"]
     },
     "trending": {
       "type": "featured-collection",
       "settings": {
-        "title": "Trending now",
+        "title": "Trending products",
         "heading_size": "h2",
         "description": "",
+        "description_style": "body",
         "collection": "",
         "products_to_show": 8,
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "show_view_all": true,
         "swipe_on_mobile": true,
         "enable_desktop_slider": true,
-        "color_scheme": "background-1"
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "quick_add": "standard",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
-    "promo": {
+    "deals-banner": {
       "type": "image-banner",
       "settings": {
         "image": "",
+        "image_2": "",
         "image_overlay_opacity": 0,
         "image_height": "small",
+        "image_behavior": "none",
         "desktop_content_position": "middle-left",
         "desktop_content_alignment": "left",
-        "color_scheme": "background-1",
         "show_text_box": true,
-        "text_alignment": "left",
-        "heading": "Save 15% on designer finds",
-        "heading_size": "h2",
-        "subheading": "Use code WEEKEND",
-        "button_label_1": "Shop designer",
-        "button_link_1": "/collections/all",
-        "show_separator": false
-      }
+        "mobile_content_alignment": "center",
+        "show_text_below": true,
+        "stack_images_on_mobile": true,
+        "color_scheme": "scheme-1"
+      },
+      "blocks": {
+        "h": { "type": "heading", "settings": { "heading": "Featured deals", "heading_size": "h2" } },
+        "t": { "type": "text",    "settings": { "text": "Limited-time offers. Images are placeholders." } },
+        "b": { "type": "buttons", "settings": { "button_label_1": "Shop deals", "button_link_1": "/collections/all", "button_style_secondary_1": false } }
+      },
+      "block_order": ["h","t","b"]
     },
-    "beauty": {
+    "best": {
       "type": "featured-collection",
       "settings": {
-        "title": "Fall Beauty & Mixology",
+        "title": "Best sellers",
         "heading_size": "h2",
+        "description": "",
+        "description_style": "body",
         "collection": "",
         "products_to_show": 8,
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "show_view_all": true,
         "swipe_on_mobile": true,
         "enable_desktop_slider": true,
-        "color_scheme": "background-1"
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "quick_add": "standard",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
-    "rich": {
+    "usp": {
       "type": "rich-text",
       "settings": {
-        "color_scheme": "background-1",
-        "narrow": true,
-        "heading": "Same-day delivery available",
-        "heading_size": "h3",
-        "text": "<p>Serving Sanford to Kissimmee. Placeholder copy — update in Theme Editor.</p>",
-        "button_label": "Learn more",
-        "button_link": "/pages/delivery"
-      }
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 32,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "h": { "type": "heading", "settings": { "heading": "Fast shipping. Easy returns. Great support.", "heading_size": "h3" } },
+        "p": { "type": "text",    "settings": { "text": "<p>All images and logos are placeholders — update anytime in the Theme Editor.</p>" } }
+      },
+      "block_order": ["h","p"]
     }
   },
-  "order": ["hero", "cats", "trending", "promo", "beauty", "rich"]
+  "order": ["hero", "cats", "trending", "deals-banner", "best", "usp"]
 }
