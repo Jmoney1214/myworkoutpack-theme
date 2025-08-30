@@ -143,9 +143,7 @@
         <h1 class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if section.settings.brand_text != blank -%}
-              <span class="h2 header__brand-text">{{ section.settings.brand_text }}</span>
-            {%- elsif settings.logo != blank -%}
+            {%- if settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">
                 {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
                 {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
@@ -185,9 +183,7 @@
         <h1 class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if section.settings.brand_text != blank -%}
-              <span class="h2 header__brand-text">{{ section.settings.brand_text }}</span>
-            {%- elsif settings.logo != blank -%}
+            {%- if settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">
                 {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
                 {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
@@ -237,8 +233,6 @@
         {%- endif -%}
       </div>
       {% render 'header-search-inline', input_id: 'Search-Header-Inline', class: 'small-hide' %}
-      <a class="header__utility-link small-hide" href="{%- if shop.customer_accounts_enabled -%}{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}{%- else -%}/account{%- endif -%}">Account &amp; Lists</a>
-      <a class="header__utility-link small-hide" href="{%- if shop.customer_accounts_enabled -%}{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}{%- else -%}/account{%- endif -%}">Returns &amp; Orders</a>
 
       {%- if shop.customer_accounts_enabled -%}
         <a
@@ -294,37 +288,6 @@
       </a>
     </div>
   </header>
-  {%- if section.settings.collections_menu != blank -%}
-    <nav class="collections-bar page-width small-hide" aria-label="Collections">
-      <menu-drawer data-breakpoint="desktop">
-        <details class="menu-drawer-container collections-menu-drawer">
-          <summary class="collections-bar__hamburger header__icon header__icon--menu link focus-inset" aria-label="Menu">
-            <span class="svg-wrapper">{{- 'icon-hamburger.svg' | inline_asset_content -}}</span>
-          </summary>
-          <div class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
-            <div class="menu-drawer__inner-container">
-              <div class="menu-drawer__navigation-container">
-                <nav class="menu-drawer__navigation">
-                  <ul class="menu-drawer__menu has-submenu list-menu" role="list">
-                    {%- for link in section.settings.collections_menu.links -%}
-                      <li>
-                        <a href="{{ link.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">{{ link.title }}</a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </details>
-      </menu-drawer>
-      <ul class="collections-bar__list">
-        {%- for link in section.settings.collections_menu.links -%}
-          <li><a class="collections-bar__link" href="{{ link.url }}">{{ link.title }}</a></li>
-        {%- endfor -%}
-      </ul>
-    </nav>
-  {%- endif -%}
 </{{ header_tag }}>
 
 {%- if settings.cart_type == "notification" -%}
@@ -490,12 +453,6 @@
   "max_blocks": 3,
   "settings": [
     {
-      "type": "text",
-      "id": "brand_text",
-      "label": "Brand text (replaces logo)",
-      "default": "Smart Home Fitness"
-    },
-    {
       "type": "select",
       "id": "logo_position",
       "options": [
@@ -541,12 +498,6 @@
       "id": "menu",
       "default": "main-menu",
       "label": "t:sections.header.settings.menu.label"
-    },
-    {
-      "type": "link_list",
-      "id": "collections_menu",
-      "label": "Collections menu (shown under header)",
-      "info": "Select a menu of collections to display as a white-text strip under the header"
     },
     {
       "type": "select",
