@@ -128,6 +128,7 @@
     endif
   -%}
   <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+    <div class="header__left">
     {%- liquid
       if section.settings.menu != blank
         render 'header-drawer'
@@ -216,19 +217,11 @@
               <span class="h2">{{ shop.name }}</span>
             {%- endif -%}
           </a>
-          <div class="header__location small-hide">
-            <span class="header__loc-pin" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
-            </span>
-            <div class="header__loc-text">
-              <span class="header__loc-line1">Delivering to {{ section.settings.location_line1 }}</span>
-              <a class="header__loc-link" href="{{ section.settings.location_link | default: '/pages/delivery' }}">Update location</a>
-            </div>
-          </div>
       {%- if request.page_type == 'index' -%}
         </h1>
       {%- endif -%}
     {%- endif -%}
+    </div>
 
     {%- comment -%} Center search between brand and right utilities {%- endcomment -%}
     {% render 'header-search-inline', input_id: 'Search-Header-Inline', class: 'small-hide header__search-center' %}
