@@ -38,7 +38,9 @@
           <div class="slideshow__slide grid__item grid--1-col slider__slide" id="Slide-{{ section.id }}-{{ forloop.index }}" {{ block.shopify_attributes }}>
             <div class="slideshow__media banner__media media{% if block.settings.image == blank %} placeholder{% endif %}">
               {%- if block.settings.image -%}
-                {{ block.settings.image | image_url: width: 2400 | image_tag: loading: forloop.index > 1 ? 'lazy' : 'eager', sizes: '100vw', widths: '750, 1100, 1500, 2000, 2400' }}
+                {% assign load_mode = 'eager' %}
+                {% if forloop.index > 1 %}{% assign load_mode = 'lazy' %}{% endif %}
+                {{ block.settings.image | image_url: width: 2400 | image_tag: loading: load_mode, sizes: '100vw', widths: '750, 1100, 1500, 2000, 2400' }}
               {%- else -%}
                 {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
@@ -125,4 +127,3 @@
   ]
 }
 {% endschema %}
-
