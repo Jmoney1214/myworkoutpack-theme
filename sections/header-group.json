@@ -14,9 +14,14 @@
     "header": {
       "type": "header",
       "settings": {}
+    },
+    "header-amz": {
+      "type": "header-amz",
+      "settings": {}
     }
   },
   "order": [
-    "header"
+    "header",
+    "header-amz"
   ]
 }

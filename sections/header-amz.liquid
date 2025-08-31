@@ -1,60 +1,33 @@
-{% comment %} Amazon-style header based on user's HTML {% endcomment %}
-{{ 'amz.css' | asset_url | stylesheet_tag }}
-<header class="amz amz-header">
-  <div class="amz-container amz-row">
-    <div class="amz-row" style="gap:8px">
-      {% if section.settings.logo != blank %}
-        {{ section.settings.logo | image_url: width: 200 | image_tag: class: 'amz-logo', loading: 'eager', alt: section.settings.logo.alt | default: shop.name }}
-      {% else %}
-        <img class="amz-logo" src="https://placehold.co/100x30/000000/F0A800?text=MyStore" alt="{{ shop.name }}">
-      {% endif %}
-      <div class="amz-location">
-        <span>Delivering to <strong>{{ section.settings.location_text | default: 'Atlanta 30301' }}</strong></span>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span>•</span><a href="{{ section.settings.location_link | default: '#' }}">Update location</a>
-        </div>
-      </div>
+<header class="amz amz-header" style="background:#121a24;color:#fff;">
+  <div class="amz-container" style="max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:16px;align-items:center;">
+    <!-- Left: Logo -->
+    <a href="/" style="background:#000;padding:10px 16px;border-radius:4px;color:#f59e0b;font-weight:800;text-decoration:none">MyStore</a>
+
+    <!-- Middle: Category + Search -->
+    <div style="display:flex;align-items:center;flex:1;max-width:980px;">
+      <div style="background:#e9ecf1;border-radius:8px 0 0 8px;padding:10px 14px;font-weight:600;color:#334155">All ▾</div>
+      <input type="search" placeholder="Search MyStore" style="flex:1;padding:12px 14px;border:0;background:#f4f6f8;color:#111827;outline:none">
+      <button aria-label="Search" style="background:#f6b400;border:0;padding:10px 16px;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center">
+        🔍
+      </button>
     </div>
 
-    <div class="amz-search">
-      <div class="wrap">
-        <select>
-          {% for opt in section.blocks %}
-            {% if opt.type == 'category' %}<option value="{{ opt.settings.value | escape }}">{{ opt.settings.label }}</option>{% endif %}
-          {% endfor %}
-        </select>
-        <form action="{{ routes.search_url }}" method="get" role="search" style="display:flex;flex:1">
-          <input type="search" name="q" placeholder="{{ section.settings.search_placeholder | default: 'Search MyStore' }}">
-          <button aria-label="Search">
-            <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div class="amz-actions">
-      <div class="hide-mobile">
-        <a href="/account">{{ section.settings.account_top | default: 'Hello, sign in' }}</a><br>
-        <strong>{{ section.settings.account_bottom | default: 'Account & Lists' }}</strong>
-      </div>
-      <div class="hide-tablet">
-        <a href="{{ routes.account_url }}">{{ section.settings.returns_top | default: 'Returns' }}</a><br>
-        <strong>{{ section.settings.returns_bottom | default: '& Orders' }}</strong>
-      </div>
-      <a href="{{ routes.cart_url }}" class="amz-chip">
-        <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-        <span>Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</span>
-      </a>
-    </div>
+    <!-- Right: Cart -->
+    <a href="/cart" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px">🛒<span id="hdrCartCount">0</span></a>
   </div>
 
-  <nav class="amz-bottomnav">
-    <div class="amz-container" style="display:flex;gap:16px;overflow:auto;white-space:nowrap">
-      {% for nav in section.blocks %}
-        {% if nav.type == 'nav' %}
-          <a href="{{ nav.settings.href | default: '#' }}">{{ nav.settings.text }}</a>
-        {% endif %}
-      {% endfor %}
+  <!-- Bottom nav row -->
+  <nav style="background:#1a2532">
+    <div class="amz-container" style="max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:24px;white-space:nowrap;overflow:auto">
+      <a href="/collections/all" style="color:#fff;text-decoration:none;display:flex;gap:8px">☰ All</a>
+      <a href="#" style="color:#fff;text-decoration:none">Medical Care</a>
+      <a href="#" style="color:#fff;text-decoration:none">Luxury</a>
+      <a href="#" style="color:#fff;text-decoration:none">Best Sellers</a>
+      <a href="#" style="color:#fff;text-decoration:none">Amazon Basics</a>
+      <a href="#" style="color:#fff;text-decoration:none">New Releases</a>
+      <a href="#" style="color:#fff;text-decoration:none">Groceries</a>
+      <a href="#" style="color:#fff;text-decoration:none">Prime</a>
+      <a href="#" style="color:#fff;text-decoration:none">Today's Deals</a>
     </div>
   </nav>
 </header>
@@ -62,25 +35,7 @@
 {% schema %}
 {
   "name": "Header (Amazon style)",
-  "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo" },
-    { "type": "text", "id": "location_text", "label": "Location text", "default": "Atlanta 30301" },
-    { "type": "url", "id": "location_link", "label": "Location link" },
-    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search MyStore" },
-    { "type": "text", "id": "account_top", "label": "Account (top)", "default": "Hello, sign in" },
-    { "type": "text", "id": "account_bottom", "label": "Account (bottom)", "default": "Account & Lists" },
-    { "type": "text", "id": "returns_top", "label": "Returns (top)", "default": "Returns" },
-    { "type": "text", "id": "returns_bottom", "label": "Returns (bottom)", "default": "& Orders" }
-  ],
-  "blocks": [
-    { "type": "category", "name": "Search category",
-      "settings":[ { "type":"text","id":"label","label":"Label","default":"All" },
-                   { "type":"text","id":"value","label":"Value","default":"all" } ] },
-    { "type": "nav", "name": "Bottom nav link",
-      "settings":[ { "type":"text","id":"text","label":"Text","default":"Best Sellers" },
-                   { "type":"url","id":"href","label":"Link"} ] }
-  ],
-  "max_blocks": 20,
-  "enabled_on": { "groups": ["header"] }
+  "settings": [],
+  "presets": [{ "name": "Header (Amazon style)" }]
 }
 {% endschema %}
