@@ -1,0 +1,45 @@
+{{ 'amz.css' | asset_url | stylesheet_tag }}
+<footer class="amz amz-footer">
+  <div class="amz-container">
+    <div class="cols">
+      {% for block in section.blocks %}
+        <div>
+          {% if block.settings.heading != blank %}<h3 style="font-weight:700; margin-bottom:12px">{{ block.settings.heading }}</h3>{% endif %}
+          <ul style="list-style:none; padding:0; margin:0">
+            {% for i in (1..6) %}
+              {% capture label %}link_label_{{ i }}{% endcapture %}
+              {% capture href %}link_href_{{ i }}{% endcapture %}
+              {% assign l = block.settings[label] %}
+              {% assign h = block.settings[href] %}
+              {% if l != blank %}
+                <li style="margin:6px 0"><a href="{{ h | default: '#' }}">{{ l }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="note"><p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p></div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name":"Footer (Compact)",
+  "blocks":[
+    { "type":"col","name":"Column",
+      "settings":[
+        { "type":"text","id":"heading","label":"Heading","default":"Get to Know Us" },
+        { "type":"text","id":"link_label_1","label":"Link 1 label" },{ "type":"url","id":"link_href_1","label":"Link 1 URL" },
+        { "type":"text","id":"link_label_2","label":"Link 2 label" },{ "type":"url","id":"link_href_2","label":"Link 2 URL" },
+        { "type":"text","id":"link_label_3","label":"Link 3 label" },{ "type":"url","id":"link_href_3","label":"Link 3 URL" },
+        { "type":"text","id":"link_label_4","label":"Link 4 label" },{ "type":"url","id":"link_href_4","label":"Link 4 URL" },
+        { "type":"text","id":"link_label_5","label":"Link 5 label" },{ "type":"url","id":"link_href_5","label":"Link 5 URL" },
+        { "type":"text","id":"link_label_6","label":"Link 6 label" },{ "type":"url","id":"link_href_6","label":"Link 6 URL" }
+      ]
+    }
+  ],
+  "presets":[{ "name":"Footer (Compact)" }],
+  "enabled_on": { "groups": ["footer"] }
+}
+{% endschema %}

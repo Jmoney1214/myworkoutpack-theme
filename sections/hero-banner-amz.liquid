@@ -1,0 +1,29 @@
+{{ 'amz.css' | asset_url | stylesheet_tag }}
+<section class="amz amz-hero" style="margin:32px 0">
+  {% if section.settings.image != blank %}
+    {{ section.settings.image | image_url: width: 2400 | image_tag: class: '', loading: 'eager', widths: '800,1200,1600,2000' }}
+  {% else %}
+    <img src="https://placehold.co/1200x500/F0A800/FFFFFF?text=Main+Hero+Banner" alt="Hero">
+  {% endif %}
+  <div class="overlay">
+    <h1 style="font-weight:700; font-size:clamp(20px,3vw,32px)">{{ section.settings.heading }}</h1>
+    {% if section.settings.subcopy != blank %}<p style="margin-top:8px;color:#374151">{{ section.settings.subcopy }}</p>{% endif %}
+    {% if section.settings.cta_link != blank %}
+      <a class="cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_text }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero (Amazon style)",
+  "settings": [
+    { "type":"image_picker", "id":"image", "label":"Hero image" },
+    { "type":"text", "id":"heading", "label":"Heading", "default":"New Arrivals Are Here!" },
+    { "type":"text", "id":"subcopy", "label":"Subcopy", "default":"Shop the latest trends and styles." },
+    { "type":"text", "id":"cta_text", "label":"CTA text", "default":"Shop Now" },
+    { "type":"url", "id":"cta_link", "label":"CTA link" }
+  ],
+  "presets": [{ "name":"Hero (Amazon style)" }]
+}
+{% endschema %}
