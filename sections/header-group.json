@@ -1,8 +1,6 @@
 {
-  "name": "Header",
+  "name": "t:sections.header.name",
   "type": "header",
-  "sections": {
-    "header": { "type": "header" }
-  },
+  "sections": { "header": { "type": "header" } },
   "order": ["header"]
 }

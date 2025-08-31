@@ -9,3 +9,5 @@ layout/*.bak.*
 # common folders to exclude
 node_modules/*
 dist/*
+!sections/footer-group.json
+!sections/header-group.json
