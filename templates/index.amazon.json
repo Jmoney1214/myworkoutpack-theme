@@ -26,42 +26,6 @@
     },
     "deals": {
       "type": "deals-carousel-amz",
-      "blocks": {
-        "deal-1": {
-          "type": "deal",
-          "settings": {
-            "badge": "Up to 30% off",
-            "title": "Product for Deal"
-          }
-        },
-        "deal-2": {
-          "type": "deal",
-          "settings": {
-            "badge": "Limited time offer",
-            "title": "Another great product"
-          }
-        },
-        "deal-3": {
-          "type": "deal",
-          "settings": {
-            "badge": "Save big!",
-            "title": "Deal of the day"
-          }
-        },
-        "deal-4": {
-          "type": "deal",
-          "settings": {
-            "badge": "Flash sale",
-            "title": "Cool gadget"
-          }
-        }
-      },
-      "block_order": [
-        "deal-1",
-        "deal-2",
-        "deal-3",
-        "deal-4"
-      ],
       "settings": {
         "title": "Today's Deals",
         "countdown_text": "Ends in: 04:32:11"
