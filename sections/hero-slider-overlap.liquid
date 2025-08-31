@@ -7,30 +7,30 @@
     position: relative;
     z-index: 2;
     max-width: var(--page-width, 1200px);
-    margin: -60px auto 0 auto; /* overlap the banner */
+    margin: -48px auto 0 auto; /* overlap the banner a bit less */
     padding: 0 20px 10px;
   }
   .hero-overlap__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px }
-  .hero-overlap__card { background:#fff; border-radius:12px; box-shadow:0 10px 24px rgba(0,0,0,.18); overflow:hidden }
+  .hero-overlap__card { background:#fff; border-radius:10px; border:1px solid #e5e7eb; box-shadow:0 8px 18px rgba(0,0,0,.08); overflow:hidden }
   .hero-overlap__card-in { padding:18px }
-  .hero-overlap__card h3 { margin:0 0 12px; font:700 20px/1.25 Inter,system-ui,sans-serif }
+  .hero-overlap__card h3 { margin:0 0 12px; font:700 20px/1.25 Inter,system-ui,sans-serif; color:#111 }
   .hero-overlap__tiles{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px }
   .hero-overlap__tile{ background:#fff }
-  .hero-overlap__img { width:100%; height:120px; object-fit:cover; display:block; background:#f5f5f5; border:1px solid #efefef; border-radius:6px }
-  .hero-overlap__caption{ margin:6px 2px 0; font:500 12px/1.2 Inter,system-ui,sans-serif; color:#222 }
+  .hero-overlap__img { width:100%; height:100px; object-fit:cover; display:block; background:#f5f5f5; border:1px solid #efefef; border-radius:6px }
+  .hero-overlap__caption{ margin:6px 2px 0; font:500 12px/1.25 Inter,system-ui,sans-serif; color:#222 }
   .hero-overlap__cta{ display:inline-block; margin-top:14px; color:#146eb4; font-weight:600; text-decoration:none }
   .hero-overlap__cta:hover{ text-decoration:underline }
   /* slider height + arrow placement */
-  .hero-overlap .banner--large .slideshow__media { min-height: 420px }
-  .hero-overlap .banner--medium .slideshow__media { min-height: 360px }
-  .hero-overlap .banner--small .slideshow__media { min-height: 280px }
+  .hero-overlap .banner--large .slideshow__media { min-height: 320px }
+  .hero-overlap .banner--medium .slideshow__media { min-height: 280px }
+  .hero-overlap .banner--small .slideshow__media { min-height: 220px }
   .hero-overlap__slider .slider-buttons{ position:absolute; inset:auto 12px 0 12px; top:50%; transform:translateY(-50%); display:flex; justify-content:space-between; pointer-events:none }
   .hero-overlap__slider .slider-button{ pointer-events:auto; background:#fff; border-radius:999px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(0,0,0,.25) }
   /* text overlay on banner */
   .hero-overlap__content{ position:absolute; inset:0 auto 0 0; display:flex; align-items:center; }
   .hero-overlap__content-in{ max-width:min(48ch, 50%); margin-left: max(20px, 5%); color:#fff }
-  .hero-overlap__headline{ margin:0; font:800 44px/1.05 Inter,system-ui,sans-serif; letter-spacing:-.4px }
-  .hero-overlap__sub{ margin:10px 0 0; font:700 20px/1.1 Inter,system-ui,sans-serif }
+  .hero-overlap__headline{ margin:0; font:800 40px/1.05 Inter,system-ui,sans-serif; letter-spacing:-.4px }
+  .hero-overlap__sub{ margin:10px 0 0; font:700 18px/1.15 Inter,system-ui,sans-serif }
   @media(max-width: 990px){ .hero-overlap__grid{ grid-template-columns:1fr } .hero-overlap__cards{ margin-top:-30px } }
 {%- endstyle -%}
 
