@@ -63,7 +63,7 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-.header-wrapper{ background:var(--amazon-light)!important; color:#fff }
+.header-wrapper{ background:var(--amazon-top)!important; color:#fff }
 .section-header .header{ max-width:1200px; margin:0 auto; padding:10px 16px }
 .header a, .header__menu-item, .header__icon{ color:#fff }
 .header__brand-text{ color:#fff; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; font-weight:800; letter-spacing:.2px }
@@ -76,18 +76,29 @@ body{
 /* Inline search bar */
 .header__search-inline{ flex:1; max-width:720px; margin:0 16px }
 .header__search-inline .field{ display:flex; align-items:center; background:#fff; border-radius:6px; overflow:hidden; border:1px solid #cbd5e1 }
+.search--header .field{ padding-left:0 }
+.search__scope{ display:inline-flex; align-items:center; gap:6px; background:#f3f4f6; border:0; border-right:1px solid #e5e7eb; padding:10px 10px; font-weight:700; color:#111; cursor:default }
+.search__scope .svg-wrapper svg{ fill:#111 }
 .header__search-inline .field__input{ border:0; flex:1; padding:10px 12px; font-size:14px }
 .header__search-inline .field__button{ background:var(--amazon-accent); border-left:1px solid #e2e8f0 }
 .header__search-inline .field__button:hover{ background:var(--amazon-accent-dark) }
 .header__search-inline .svg-wrapper svg{ fill:#111 }
 
 /* Collections bar under header */
-.collections-bar{ background:var(--amazon-light); border-top:1px solid rgba(255,255,255,.2); padding:6px 0 }
+.collections-bar{ background:var(--amazon-subnav); border-top:1px solid rgba(255,255,255,.1); padding:6px 0 }
 .collections-bar__list{ display:flex; gap:14px; align-items:center; margin:0; padding:0; list-style:none }
 .collections-bar__link{ color:#fff; text-decoration:none; font-weight:700; font-size:14px }
 .collections-bar__link:hover{ text-decoration:underline }
 .collections-bar__hamburger{ display:inline-flex; align-items:center; margin-right:10px; color:#fff }
 .collections-bar__hamburger .svg-wrapper svg{ fill:#fff }
+.collections-bar__all-text{ margin-left:6px; font-weight:700; font-size:14px }
+
+/* Location block */
+.header__location{ display:inline-flex; align-items:center; gap:8px; margin-left:12px; color:#e5e7eb }
+.header__loc-pin{ color:#eab308 }
+.header__loc-line1{ display:block; font-size:12px; opacity:.9 }
+.header__loc-link{ display:block; font-weight:800; color:#fff; font-size:12px; text-decoration:none }
+.header__loc-link:hover{ text-decoration:underline }
 
 /* Primary action buttons */
 .button, .shopify-payment-button__button--unbranded{ background:var(--amazon-accent); border-color:var(--amazon-accent) }

@@ -14,6 +14,10 @@
   {%- endif -%}
     <form action="{{ routes.search_url }}" method="get" role="search" class="search search--header">
       <div class="field">
+        <button type="button" class="search__scope">
+          <span class="search__scope-label">All</span>
+          <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+        </button>
         <input
           class="search__input field__input"
           id="{{ input_id }}"
@@ -56,4 +60,3 @@
     </search-form>
   {%- endif -%}
 </div>
-

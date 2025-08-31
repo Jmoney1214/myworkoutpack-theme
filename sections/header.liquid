@@ -165,6 +165,15 @@
               <span class="h2">{{ shop.name }}</span>
             {%- endif -%}
           </a>
+          <div class="header__location small-hide">
+            <span class="header__loc-pin" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
+            </span>
+            <div class="header__loc-text">
+              <span class="header__loc-line1">Delivering to {{ section.settings.location_line1 }}</span>
+              <a class="header__loc-link" href="{{ section.settings.location_link | default: '/pages/delivery' }}">Update location</a>
+            </div>
+          </div>
       {%- if request.page_type == 'index' -%}
         </h1>
       {%- endif -%}
@@ -207,6 +216,15 @@
               <span class="h2">{{ shop.name }}</span>
             {%- endif -%}
           </a>
+          <div class="header__location small-hide">
+            <span class="header__loc-pin" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>
+            </span>
+            <div class="header__loc-text">
+              <span class="header__loc-line1">Delivering to {{ section.settings.location_line1 }}</span>
+              <a class="header__loc-link" href="{{ section.settings.location_link | default: '/pages/delivery' }}">Update location</a>
+            </div>
+          </div>
       {%- if request.page_type == 'index' -%}
         </h1>
       {%- endif -%}
@@ -309,6 +327,7 @@
         <details class="menu-drawer-container collections-menu-drawer">
           <summary class="collections-bar__hamburger header__icon header__icon--menu link focus-inset" aria-label="Menu">
             <span class="svg-wrapper">{{- 'icon-hamburger.svg' | inline_asset_content -}}</span>
+            <span class="collections-bar__all-text">All</span>
           </summary>
           <div class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
             <div class="menu-drawer__inner-container">
@@ -498,6 +517,18 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
+    {
+      "type": "text",
+      "id": "location_line1",
+      "label": "Location line (e.g., Sanford 32771)",
+      "default": "Sanford 32771"
+    },
+    {
+      "type": "url",
+      "id": "location_link",
+      "label": "Update location link",
+      "default": "/pages/delivery"
+    },
     {
       "type": "text",
       "id": "brand_text",
