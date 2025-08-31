@@ -65,16 +65,22 @@ body{
 }
 .header-wrapper{ background:var(--amazon-top)!important; color:#fff }
 .section-header .header{ max-width:1200px; margin:0 auto; padding:10px 16px }
+.section-header .header{ display:flex; align-items:center; gap:14px }
 .header a, .header__menu-item, .header__icon{ color:#fff }
 .header__brand-text{ color:#fff; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; font-weight:800; letter-spacing:.2px }
 .header__utility-link{ color:#fff; text-decoration:none; font-weight:700; margin:0 8px; font-size:13px }
 .header__utility-link:hover{ text-decoration:underline }
+.header__icons{ margin-left:auto; display:flex; align-items:center; gap:14px }
+.header__util{ color:#fff; text-decoration:none; display:inline-flex; flex-direction:column; line-height:1.05 }
+.header__util-small{ font-size:12px; opacity:.9 }
+.header__util-large{ font-size:14px; font-weight:800 }
 .header__inline-menu{ background:transparent; border-radius:6px; padding:6px 10px; margin-top:8px }
 .header__inline-menu .list-menu{ gap:8px }
 .header__icons .svg-wrapper svg{ fill:#fff }
 
 /* Inline search bar */
 .header__search-inline{ flex:1; max-width:720px; margin:0 16px }
+.header__search-center{ order:2 }
 .header__search-inline .field{ display:flex; align-items:center; background:#fff; border-radius:6px; overflow:hidden; border:1px solid #cbd5e1 }
 .search--header .field{ padding-left:0 }
 .search__scope{ display:inline-flex; align-items:center; gap:6px; background:#f3f4f6; border:0; border-right:1px solid #e5e7eb; padding:10px 10px; font-weight:700; color:#111; cursor:default }
@@ -83,6 +89,10 @@ body{
 .header__search-inline .field__button{ background:var(--amazon-accent); border-left:1px solid #e2e8f0 }
 .header__search-inline .field__button:hover{ background:var(--amazon-accent-dark) }
 .header__search-inline .svg-wrapper svg{ fill:#111 }
+
+/* Cart */
+.header__cart{ display:inline-flex; align-items:center; gap:6px }
+.header__cart-text{ font-weight:800; font-size:14px }
 
 /* Collections bar under header */
 .collections-bar{ background:var(--amazon-subnav); border-top:1px solid rgba(255,255,255,.1); padding:6px 0 }
