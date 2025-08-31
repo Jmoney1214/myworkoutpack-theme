@@ -1,0 +1,41 @@
+{{ 'amz.css' | asset_url | stylesheet_tag }}
+<section class="amz amz-deals" style="margin:32px 0">
+  <div class="bar">
+    <h2 style="font-weight:700">{{ section.settings.title }}</h2>
+    {% if section.settings.countdown_text != blank %}<span class="count">{{ section.settings.countdown_text }}</span>{% endif %}
+  </div>
+  <div class="amz-carousel">
+    {% for block in section.blocks %}
+      <div class="amz-deal">
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy', class: '' }}
+        {% else %}
+          <img src="https://placehold.co/150x150/ff0000/ffffff?text=Deal" alt="">
+        {% endif %}
+        {% if block.settings.badge != blank %}<p class="badge">{{ block.settings.badge }}</p>{% endif %}
+        {% if block.settings.title != blank %}<p class="text-sm">{{ block.settings.title }}</p>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Deals Carousel",
+  "settings": [
+    { "type":"text","id":"title","label":"Title","default":"Today's Deals" },
+    { "type":"text","id":"countdown_text","label":"Right badge text","default":"Ends in: 04:32:11" }
+  ],
+  "blocks":[
+    { "type":"deal","name":"Deal",
+      "settings":[
+        { "type":"image_picker","id":"image","label":"Image"},
+        { "type":"text","id":"badge","label":"Red badge (e.g. 'Up to 30% off')"},
+        { "type":"text","id":"title","label":"Title" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets":[{ "name":"Deals Carousel" }]
+}
+{% endschema %}

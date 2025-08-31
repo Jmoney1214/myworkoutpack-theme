@@ -1,0 +1,86 @@
+{% comment %} Amazon-style header based on user's HTML {% endcomment %}
+{{ 'amz.css' | asset_url | stylesheet_tag }}
+<header class="amz amz-header">
+  <div class="amz-container amz-row">
+    <div class="amz-row" style="gap:8px">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 200 | image_tag: class: 'amz-logo', loading: 'eager', alt: section.settings.logo.alt | default: shop.name }}
+      {% else %}
+        <img class="amz-logo" src="https://placehold.co/100x30/000000/F0A800?text=MyStore" alt="{{ shop.name }}">
+      {% endif %}
+      <div class="amz-location">
+        <span>Delivering to <strong>{{ section.settings.location_text | default: 'Atlanta 30301' }}</strong></span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span>•</span><a href="{{ section.settings.location_link | default: '#' }}">Update location</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="amz-search">
+      <div class="wrap">
+        <select>
+          {% for opt in section.blocks %}
+            {% if opt.type == 'category' %}<option value="{{ opt.settings.value | escape }}">{{ opt.settings.label }}</option>{% endif %}
+          {% endfor %}
+        </select>
+        <form action="{{ routes.search_url }}" method="get" role="search" style="display:flex;flex:1">
+          <input type="search" name="q" placeholder="{{ section.settings.search_placeholder | default: 'Search MyStore' }}">
+          <button aria-label="Search">
+            <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="amz-actions">
+      <div class="hide-mobile">
+        <a href="/account">{{ section.settings.account_top | default: 'Hello, sign in' }}</a><br>
+        <strong>{{ section.settings.account_bottom | default: 'Account & Lists' }}</strong>
+      </div>
+      <div class="hide-tablet">
+        <a href="{{ routes.account_url }}">{{ section.settings.returns_top | default: 'Returns' }}</a><br>
+        <strong>{{ section.settings.returns_bottom | default: '& Orders' }}</strong>
+      </div>
+      <a href="{{ routes.cart_url }}" class="amz-chip">
+        <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+        <span>Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="amz-bottomnav">
+    <div class="amz-container" style="display:flex;gap:16px;overflow:auto;white-space:nowrap">
+      {% for nav in section.blocks %}
+        {% if nav.type == 'nav' %}
+          <a href="{{ nav.settings.href | default: '#' }}">{{ nav.settings.text }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header (Amazon style)",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "location_text", "label": "Location text", "default": "Atlanta 30301" },
+    { "type": "url", "id": "location_link", "label": "Location link" },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search MyStore" },
+    { "type": "text", "id": "account_top", "label": "Account (top)", "default": "Hello, sign in" },
+    { "type": "text", "id": "account_bottom", "label": "Account (bottom)", "default": "Account & Lists" },
+    { "type": "text", "id": "returns_top", "label": "Returns (top)", "default": "Returns" },
+    { "type": "text", "id": "returns_bottom", "label": "Returns (bottom)", "default": "& Orders" }
+  ],
+  "blocks": [
+    { "type": "category", "name": "Search category",
+      "settings":[ { "type":"text","id":"label","label":"Label","default":"All" },
+                   { "type":"text","id":"value","label":"Value","default":"all" } ] },
+    { "type": "nav", "name": "Bottom nav link",
+      "settings":[ { "type":"text","id":"text","label":"Text","default":"Best Sellers" },
+                   { "type":"url","id":"href","label":"Link"} ] }
+  ],
+  "max_blocks": 20,
+  "enabled_on": { "groups": ["header"] }
+}
+{% endschema %}
