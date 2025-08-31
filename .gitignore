@@ -150,3 +150,5 @@ ehthumbs.db
 Thumbs.db
 .shopify
 >>>>>>> 9d6b40d (Fix cart performance measurement to exclude debounce delays (#3833))
+.env
+.env
