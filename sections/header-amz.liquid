@@ -1,6 +1,184 @@
-<link rel="stylesheet" href="{{ 'header-amz.css' | asset_url }}" media="print" onload="this.media='all'">
+<style>
+  /* Custom styles to mimic Amazon's look and feel */
+  .amz-header {
+    background-color: #131921;
+    color: white;
+  }
+
+  .amz-header a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .amz-header__top {
+    background-color: #131921;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #3a4553;
+  }
+
+  .amz-header__nav {
+    background-color: #232F3E;
+    padding: 0.5rem 1rem;
+  }
+
+  .amz-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1500px; /* Or your preferred max-width */
+  }
+
+  .amz-logo,
+  .amz-location,
+  .amz-util,
+  .amz-nav a {
+    padding: 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+  }
+  
+  .amz-logo:hover,
+  .amz-location:hover,
+  .amz-util:hover,
+  .amz-nav a:hover {
+    border-color: white;
+  }
+
+  .amz-logo {
+    flex-shrink: 0;
+  }
+  
+  .amz-logo img {
+    display: block;
+    max-height: 30px; /* Adjust as needed */
+    width: auto;
+  }
+
+  .amz-location {
+    display: none; /* Hidden on smaller screens */
+  }
+
+  @media (min-width: 768px) {
+    .amz-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .amz-two__top {
+    font-size: 0.75rem;
+    color: #CCCCCC;
+  }
+
+  .amz-two__bottom {
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .amz-search {
+    flex-grow: 1;
+    display: flex;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    margin: 0 1rem;
+  }
+
+  .amz-search__select {
+    background-color: #F3F3F3;
+    color: #0F1111;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.75rem;
+    border-right: 1px solid #DDD;
+    cursor: pointer;
+  }
+  
+  .amz-search__input {
+    width: 100%;
+    border: none;
+    padding: 0.75rem;
+    color: black;
+  }
+
+  .amz-search__input:focus {
+    outline: 2px solid #F90;
+    outline-offset: -2px;
+  }
+
+  .amz-search__button {
+    background-color: #FEBD69;
+    padding: 0.75rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .amz-search__button:hover {
+    background-color: #F3A847;
+  }
+
+  .amz-utils {
+    display: none; /* Utils hidden on mobile by default */
+  }
+
+  @media (min-width: 1024px) {
+    .amz-utils {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+  }
+  
+  .amz-cart {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
+  
+  .amz-cart span:last-child {
+      font-weight: 700;
+  }
+
+  .amz-cart__iconwrap {
+    position: relative;
+  }
+
+  .amz-cart__count {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #F90;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  
+  .amz-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+  }
+
+  .amz-promo {
+      margin-left: auto;
+      font-weight: 700;
+      display: none;
+  }
+  
+  @media(min-width: 1024px) {
+      .amz-promo {
+          display: block;
+      }
+  }
+
+</style>
+
 <header class="amz-header">
-  <div class="amz-header__top amz-belt">
+  <div class="amz-header__top">
     <div class="amz-container">
       <a class="amz-logo" href="{{ routes.root_url }}">
         {%- if settings.logo != blank -%}
@@ -23,15 +201,15 @@
       </a>
 
       {%- if section.settings.show_location -%}
-      {%- liquid
-        assign loc_href = section.settings.location_link | default: '/pages/delivery'
-        assign loc_text = section.settings.location_cta | default: 'Update location'
-      -%}
-      <a class="amz-location" href="{{ loc_href }}">
-        <span class="amz-location__icon"><img src="{{ 'icon-map-pin.svg' | asset_url }}" alt="" width="16" height="16" loading="lazy"></span>
+      <a class="amz-location" href="{{ section.settings.location_link | default: '#' }}">
+        <span class="amz-location__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+          </svg>
+        </span>
         <span class="amz-two">
-          <span class="amz-two__top">Delivering to {{ section.settings.location_value | default: 'Atlanta 30301' }}</span>
-          <span class="amz-two__bottom">{{ loc_text | link_to: loc_href }}</span>
+          <span class="amz-two__top">{{ section.settings.location_label | default: 'Delivering to' }}</span>
+          <span class="amz-two__bottom">{{ section.settings.location_value | default: 'Update location' }}</span>
         </span>
       </a>
       {%- endif -%}
@@ -39,24 +217,26 @@
       <form class="amz-search" action="{{ routes.search_url }}" method="get" role="search">
         <label for="AmzSearchInput-{{ section.id }}" class="visually-hidden">{{ 'general.search.search' | t }}</label>
         <div class="amz-search__select" aria-hidden="true">All</div>
-        <div class="amz-search__divider" aria-hidden="true"></div>
-        <input id="AmzSearchInput-{{ section.id }}" class="amz-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | default: 'Search Amazon' }}" />
+        <input id="AmzSearchInput-{{ section.id }}" class="amz-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | default: 'Search' }}">
         <button class="amz-search__button" aria-label="{{ 'general.search.submit' | t }}">
-          <img src="{{ 'icon-search.svg' | asset_url }}" alt="" width="20" height="20" loading="lazy">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="text-black" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.62.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
         </button>
       </form>
 
       <div class="amz-utils">
         {%- if section.settings.show_language and localization.available_languages.size > 0 -%}
           {%- assign current_lang = localization.language.iso_code | upcase -%}
-          <a class="amz-lang" href="#" aria-label="Language">
-            {{ current_lang }} ▾
+          <a class="amz-util amz-lang" href="#" aria-label="Language">
+            {{ current_lang }} &#9662;
           </a>
         {%- endif -%}
+        
         {%- if section.settings.show_account -%}
           <a class="amz-util amz-account" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
             <span class="amz-two">
-              <span class="amz-two__top">{{ 'customer.login.sign_in' | t | default: 'Hello, sign in' }}</span>
+              <span class="amz-two__top">Hello, {% if customer %}{{ customer.first_name }}{% else %}sign in{% endif %}</span>
               <span class="amz-two__bottom">{{ 'layout.customer.account' | t | default: 'Account & Lists' }}</span>
             </span>
           </a>
@@ -74,7 +254,9 @@
         {%- if section.settings.show_cart -%}
           <a class="amz-util amz-cart" href="{{ routes.cart_url }}">
             <span class="amz-cart__iconwrap">
-              <img src="{{ 'icon-cart.svg' | asset_url }}" alt="" width="28" height="28" loading="lazy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg>
               <span class="amz-cart__count">{%- if cart != empty -%}{{ cart.item_count }}{%- else -%}0{%- endif -%}</span>
             </span>
             <span>{{ 'layout.cart.title' | t | default: 'Cart' }}</span>
@@ -84,7 +266,7 @@
     </div>
   </div>
 
-  <div class="amz-header__nav amz-main">
+  <div class="amz-header__nav">
     <div class="amz-container">
       <nav class="amz-nav" aria-label="Primary">
         <a href="/collections/all">☰ {{ 'sections.header.all' | t | default: 'All' }}</a>
@@ -105,7 +287,7 @@
 {
   "name": "Header (Amazon style)",
   "settings": [
-    { "type": "checkbox", "id": "show_language", "label": "Show language", "default": true },
+    { "type": "checkbox", "id": "show_language", "label": "Show language selector", "default": true },
     {
       "type": "checkbox",
       "id": "show_location",
@@ -140,9 +322,9 @@
       "id": "menu",
       "label": "Navigation menu"
     },
-    { "type": "checkbox", "id": "show_account", "label": "Show account", "default": true },
-    { "type": "checkbox", "id": "show_returns_orders", "label": "Show returns & orders", "default": true },
-    { "type": "checkbox", "id": "show_cart", "label": "Show cart", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "Show account link", "default": true },
+    { "type": "checkbox", "id": "show_returns_orders", "label": "Show returns & orders link", "default": true },
+    { "type": "checkbox", "id": "show_cart", "label": "Show cart link", "default": true },
     { "type": "text", "id": "promo_text", "label": "Right promo text", "default": "Shop great deals now" }
   ],
   "presets": [{ "name": "Header (Amazon style)" }]
