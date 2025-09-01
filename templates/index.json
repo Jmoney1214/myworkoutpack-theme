@@ -70,10 +70,10 @@
     }
   },
   "order": [
-    "hero",
-    "grid1",
-    "deals",
     "banner",
-    "grid2"
+    "deals",
+    "grid1",
+    "grid2",
+    "hero"
   ]
 }

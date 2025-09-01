@@ -2,15 +2,11 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "header": {
-      "type": "header"
-    },
     "header-amz": {
       "type": "header-amz"
     }
   },
   "order": [
-    "header-amz",
-    "header"
+    "header-amz"
   ]
 }
