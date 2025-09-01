@@ -1,33 +1,44 @@
-<header class="amz amz-header" style="background:#121a24;color:#fff;">
-  <div class="amz-container" style="max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:16px;align-items:center;">
-    <!-- Left: Logo -->
-    <a href="/" style="background:#000;padding:10px 16px;border-radius:4px;color:#f59e0b;font-weight:800;text-decoration:none">MyStore</a>
-
-    <!-- Middle: Category + Search -->
+<header style="background:#121a24;color:#fff;">
+  <div style="max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:16px;align-items:center;">
+    <a href="{{ routes.root_url }}" style="background:#000;padding:10px 16px;border-radius:4px;color:#f59e0b;font-weight:800;text-decoration:none">
+      {%- if settings.logo != blank -%}
+        {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+        {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+        {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 40vw{% endcapture %}
+        {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+        {{ settings.logo | image_url: width: 600 | image_tag:
+          class: '',
+          widths: widths,
+          height: logo_height,
+          width: settings.logo_width,
+          alt: logo_alt,
+          sizes: sizes,
+          preload: true
+        }}
+      {%- else -%}
+        {{ shop.name }}
+      {%- endif -%}
+    </a>
     <div style="display:flex;align-items:center;flex:1;max-width:980px;">
       <div style="background:#e9ecf1;border-radius:8px 0 0 8px;padding:10px 14px;font-weight:600;color:#334155">All ▾</div>
-      <input type="search" placeholder="Search MyStore" style="flex:1;padding:12px 14px;border:0;background:#f4f6f8;color:#111827;outline:none">
-      <button aria-label="Search" style="background:#f6b400;border:0;padding:10px 16px;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:center">
-        🔍
-      </button>
+      <form action="{{ routes.search_url }}" method="get" role="search" style="display:flex;align-items:center;flex:1">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" style="flex:1;padding:12px 14px;border:0;background:#f4f6f8;color:#111827;outline:none">
+        <button aria-label="{{ 'general.search.submit' | t }}" style="background:#f6b400;border:0;padding:10px 16px;border-radius:0 8px 8px 0">🔍</button>
+      </form>
     </div>
-
-    <!-- Right: Cart -->
-    <a href="/cart" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px">🛒<span id="hdrCartCount">0</span></a>
+    <a href="{{ routes.cart_url }}" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px">
+      🛒
+      <span id="hdrCartCount">{%- if cart != empty -%}{{ cart.item_count }}{%- else -%}0{%- endif -%}</span>
+    </a>
   </div>
-
-  <!-- Bottom nav row -->
   <nav style="background:#1a2532">
-    <div class="amz-container" style="max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:24px;white-space:nowrap;overflow:auto">
-      <a href="/collections/all" style="color:#fff;text-decoration:none;display:flex;gap:8px">☰ All</a>
-      <a href="#" style="color:#fff;text-decoration:none">Medical Care</a>
-      <a href="#" style="color:#fff;text-decoration:none">Luxury</a>
-      <a href="#" style="color:#fff;text-decoration:none">Best Sellers</a>
-      <a href="#" style="color:#fff;text-decoration:none">Amazon Basics</a>
-      <a href="#" style="color:#fff;text-decoration:none">New Releases</a>
-      <a href="#" style="color:#fff;text-decoration:none">Groceries</a>
-      <a href="#" style="color:#fff;text-decoration:none">Prime</a>
-      <a href="#" style="color:#fff;text-decoration:none">Today's Deals</a>
+    <div style="max-width:1280px;margin:0 auto;padding:10px 16px;display:flex;gap:24px;white-space:nowrap;overflow:auto">
+      <a href="/collections/all" style="color:#fff;text-decoration:none;display:flex;gap:8px">☰ {{ 'sections.header.all' | t | default: 'All' }}</a>
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" style="color:#fff;text-decoration:none">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- endif -%}
     </div>
   </nav>
 </header>
@@ -35,7 +46,13 @@
 {% schema %}
 {
   "name": "Header (Amazon style)",
-  "settings": [],
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu"
+    }
+  ],
   "presets": [{ "name": "Header (Amazon style)" }]
 }
 {% endschema %}
