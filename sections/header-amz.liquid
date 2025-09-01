@@ -23,11 +23,15 @@
       </a>
 
       {%- if section.settings.show_location -%}
-      <a class="amz-location" href="{{ section.settings.location_link | default: '/pages/delivery' }}">
+      {%- liquid
+        assign loc_href = section.settings.location_link | default: '/pages/delivery'
+        assign loc_text = section.settings.location_cta | default: 'Update location'
+      -%}
+      <a class="amz-location" href="{{ loc_href }}">
         <span class="amz-location__icon"><img src="{{ 'icon-map-pin.svg' | asset_url }}" alt="" width="16" height="16" loading="lazy"></span>
         <span class="amz-two">
           <span class="amz-two__top">Delivering to {{ section.settings.location_value | default: 'Atlanta 30301' }}</span>
-          <span class="amz-two__bottom">{{ section.settings.location_cta | default: 'Update location' | link_to: section.settings.location_link | default: '/pages/delivery' }}</span>
+          <span class="amz-two__bottom">{{ loc_text | link_to: loc_href }}</span>
         </span>
       </a>
       {%- endif -%}
