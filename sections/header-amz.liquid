@@ -26,18 +26,17 @@
       <a class="amz-location" href="{{ section.settings.location_link | default: '/pages/delivery' }}">
         <span class="amz-location__icon"><img src="{{ 'icon-map-pin.svg' | asset_url }}" alt="" width="16" height="16" loading="lazy"></span>
         <span class="amz-two">
-          <span class="amz-two__top">{{ section.settings.location_label | default: 'Deliver to' }}</span>
-          <span class="amz-two__bottom">{{ section.settings.location_value | default: 'Your location' }}</span>
+          <span class="amz-two__top">Delivering to {{ section.settings.location_value | default: 'Atlanta 30301' }}</span>
+          <span class="amz-two__bottom">{{ section.settings.location_cta | default: 'Update location' | link_to: section.settings.location_link | default: '/pages/delivery' }}</span>
         </span>
       </a>
       {%- endif -%}
 
       <form class="amz-search" action="{{ routes.search_url }}" method="get" role="search">
         <label for="AmzSearchInput-{{ section.id }}" class="visually-hidden">{{ 'general.search.search' | t }}</label>
-        <select class="amz-search__select" aria-label="Category">
-          <option>All</option>
-        </select>
-        <input id="AmzSearchInput-{{ section.id }}" class="amz-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | default: 'Search' }}" />
+        <div class="amz-search__select" aria-hidden="true">All</div>
+        <div class="amz-search__divider" aria-hidden="true"></div>
+        <input id="AmzSearchInput-{{ section.id }}" class="amz-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | default: 'Search Amazon' }}" />
         <button class="amz-search__button" aria-label="{{ 'general.search.submit' | t }}">
           <img src="{{ 'icon-search.svg' | asset_url }}" alt="" width="20" height="20" loading="lazy">
         </button>
@@ -70,8 +69,10 @@
 
         {%- if section.settings.show_cart -%}
           <a class="amz-util amz-cart" href="{{ routes.cart_url }}">
-            <img src="{{ 'icon-cart.svg' | asset_url }}" alt="" width="24" height="24" loading="lazy">
-            <span class="amz-cart__count">{%- if cart != empty -%}{{ cart.item_count }}{%- else -%}0{%- endif -%}</span>
+            <span class="amz-cart__iconwrap">
+              <img src="{{ 'icon-cart.svg' | asset_url }}" alt="" width="28" height="28" loading="lazy">
+              <span class="amz-cart__count">{%- if cart != empty -%}{{ cart.item_count }}{%- else -%}0{%- endif -%}</span>
+            </span>
             <span>{{ 'layout.cart.title' | t | default: 'Cart' }}</span>
           </a>
         {%- endif -%}
