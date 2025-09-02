@@ -9,65 +9,23 @@
  */
 {
   "sections": {
-    "hero": {
-      "type": "hero-prime",
+    "banner": {
+      "type": "full-width-banner-amz",
       "settings": {}
     },
-    "usp": {
-      "type": "usp-bar",
-      "blocks": {
-        "u1": {
-          "type": "usp",
-          "settings": {}
-        },
-        "u2": {
-          "type": "usp",
-          "settings": {}
-        },
-        "u3": {
-          "type": "usp",
-          "settings": {}
-        },
-        "u4": {
-          "type": "usp",
-          "settings": {}
-        }
+    "deals": {
+      "type": "deals-carousel-amz",
+      "settings": {
+        "title": "Today's Deals",
+        "countdown_text": "Ends in: 04:32:11"
       },
-      "block_order": [
-        "u1",
-        "u2",
-        "u3",
-        "u4"
-      ],
-      "settings": {}
-    },
-    "bundles": {
-      "type": "bundle-offers",
       "blocks": {
-        "b1": {
-          "type": "bundle",
-          "settings": {}
-        },
-        "b2": {
-          "type": "bundle",
-          "settings": {}
-        },
-        "b3": {
-          "type": "bundle",
-          "settings": {}
-        }
+        "d1": { "type": "deal", "settings": {} },
+        "d2": { "type": "deal", "settings": {} },
+        "d3": { "type": "deal", "settings": {} }
       },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3"
-      ],
-      "settings": {}
+      "block_order": ["d1", "d2", "d3"]
     }
   },
-  "order": [
-    "hero",
-    "usp",
-    "bundles"
-  ]
+  "order": ["banner", "deals"]
 }

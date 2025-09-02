@@ -12,7 +12,7 @@
   "type": "header",
   "sections": {
     "header": {
-      "type": "header",
+      "type": "header-amz",
       "settings": {}
     }
   },

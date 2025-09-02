@@ -1,0 +1,42 @@
+/* Generic Amazon-style utilities shared by custom sections */
+.amz { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+/* Full-width banner */
+.amz-banner img { width: 100%; height: auto; display: block; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
+
+/* Hero with centered overlay */
+.amz-hero { position: relative; }
+.amz-hero > img { width: 100%; height: auto; display: block; border-radius: 12px; }
+.amz-hero .overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px; }
+.amz-hero .cta { background: #111; color: #fff; display: inline-block; padding: 8px 14px; border-radius: 999px; font-weight: 700; }
+
+/* Deals carousel */
+.amz-deals .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
+.amz-deals .count { background: #ef4444; color: #fff; padding: 6px 10px; font-weight: 700; border-radius: 999px; font-size: 12px; white-space: nowrap; }
+.amz-carousel { display: grid; grid-auto-flow: column; gap: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+.amz-deal { width: 240px; background: #fff; border-radius: 14px; padding: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.amz-deal img { width: 100%; height: auto; display: block; border-radius: 10px; }
+.amz-deal .badge { display: inline-block; margin-top: 8px; background: #ef4444; color: #fff; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 12px; }
+.amz-deal .text-sm { font-size: 0.875rem; color: #374151; margin: 6px 0 0; }
+
+/* Product grid (4-col) */
+.amz-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+.amz-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.06); display: flex; flex-direction: column; }
+.amz-card img { width: 100%; height: auto; display: block; }
+.amz-card .content { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+.amz-price { display: flex; align-items: baseline; gap: 8px; font-weight: 700; }
+.amz-price .now { color: #111; }
+.amz-price .was { color: #6b7280; text-decoration: line-through; font-weight: 600; }
+
+/* Compact footer */
+.amz-footer { background: #0b1622; color: #d1d5db; padding: 28px 0; }
+.amz-footer a { color: #d1d5db; text-decoration: none; }
+.amz-footer a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.amz-footer .amz-container { max-width: 1280px; margin: 0 auto; padding: 0 16px; }
+.amz-footer .cols { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; margin-bottom: 18px; }
+.amz-footer .note { text-align: center; color: #9ca3af; font-size: 14px; }
+
+@media (max-width: 1024px) { .amz-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } .amz-footer .cols { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 720px)  { .amz-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } .amz-footer .cols { grid-template-columns: repeat(2, minmax(0,1fr)); } .amz-deal { width: 200px; } }
+@media (max-width: 480px)  { .amz-grid { grid-template-columns: 1fr; } .amz-footer .cols { grid-template-columns: 1fr; } .amz-deal { width: 180px; } }
+
