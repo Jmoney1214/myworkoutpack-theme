@@ -9,17 +9,6 @@
  */
 {
   "sections": {
-    "hero_banner_amz_fbBxCC": {
-      "type": "hero-banner-amz",
-      "name": "Hero (Amazon style)",
-      "settings": {
-        "image": "shopify://shop_images/Pickleball_ContestBanner_050423.png",
-        "heading": "",
-        "subcopy": "",
-        "cta_text": "Shop Now",
-        "cta_link": ""
-      }
-    },
     "panels": {
       "type": "category-panels-amz",
       "blocks": {
@@ -81,7 +70,6 @@
     }
   },
   "order": [
-    "hero_banner_amz_fbBxCC",
     "panels"
   ]
 }
