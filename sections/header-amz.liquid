@@ -144,7 +144,7 @@
             {%- endfor -%}
           {%- endif -%}
         </nav>
-        {%- if section.settings.promo_text != blank -%}
+        {%- if section.settings.show_promo and section.settings.promo_text != blank -%}
           <div class="amz-promo">{{ section.settings.promo_text }}</div>
         {%- endif -%}
       </div>
@@ -202,12 +202,8 @@
       "id": "menu",
       "label": "Navigation menu"
     },
-    {
-      "type": "text",
-      "id": "promo_text",
-      "label": "Right promo text",
-      "default": "Shop great deals now"
-    },
+    { "type": "checkbox", "id": "show_promo", "label": "Show right promo text", "default": false },
+    { "type": "text", "id": "promo_text", "label": "Right promo text", "default": "Shop great deals now" },
     {
       "type": "header",
       "content": "Display Options"
