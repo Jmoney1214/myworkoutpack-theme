@@ -9,23 +9,23 @@
  */
 {
   "sections": {
-    "banner": {
-      "type": "full-width-banner-amz",
-      "settings": {}
-    },
-    "deals": {
-      "type": "deals-carousel-amz",
+    "hero": {
+      "type": "hero-prime",
       "settings": {
-        "title": "Today's Deals",
-        "countdown_text": "Ends in: 04:32:11"
-      },
+        "heading": "Fast, free shipping\nplus streaming",
+        "btn_label": "Join Prime"
+      }
+    },
+    "panels": {
+      "type": "category-panels-amz",
       "blocks": {
-        "d1": { "type": "deal", "settings": {} },
-        "d2": { "type": "deal", "settings": {} },
-        "d3": { "type": "deal", "settings": {} }
+        "p1": { "type": "panel", "settings": { "heading": "Trending: Fall Beauty", "cta_label": "Shop more beauty" } },
+        "p2": { "type": "panel", "settings": { "heading": "Discover Everyday Essentials", "cta_label": "Shop more everyday essentials" } },
+        "p3": { "type": "panel", "settings": { "heading": "Shop gift cards under $50", "cta_label": "Shop gift cards" } }
       },
-      "block_order": ["d1", "d2", "d3"]
+      "block_order": ["p1","p2","p3"],
+      "settings": {}
     }
   },
-  "order": ["banner", "deals"]
+  "order": ["hero", "panels"]
 }

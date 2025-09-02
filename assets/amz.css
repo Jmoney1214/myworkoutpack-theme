@@ -40,3 +40,17 @@
 @media (max-width: 720px)  { .amz-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } .amz-footer .cols { grid-template-columns: repeat(2, minmax(0,1fr)); } .amz-deal { width: 200px; } }
 @media (max-width: 480px)  { .amz-grid { grid-template-columns: 1fr; } .amz-footer .cols { grid-template-columns: 1fr; } .amz-deal { width: 180px; } }
 
+/* Category panels (3-up with 2x2 tiles) */
+.amz-panels { margin: 24px 0; }
+.amz-panels-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+.amz-panel { background: #fff; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); display: flex; flex-direction: column; }
+.amz-panel h3 { font-weight: 800; font-size: clamp(16px, 2vw, 18px); color: #111827; margin: 0 0 10px; }
+.amz-panel-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+.amz-panel-tile a { display: block; color: #111827; text-decoration: none; }
+.amz-panel-tile img { width: 100%; height: auto; display: block; border-radius: 8px; }
+.amz-panel-tile .caption { font-size: 12px; color: #374151; margin-top: 6px; }
+.amz-panel-cta { margin-top: 10px; color: #2563eb; font-weight: 600; text-decoration: none; }
+.amz-panel-cta:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+@media (max-width: 990px) { .amz-panels-row { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px) { .amz-panels-row { grid-template-columns: 1fr; } }
