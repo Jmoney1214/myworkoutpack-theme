@@ -13,7 +13,8 @@
       "type": "hero-prime",
       "settings": {
         "heading": "Fast, free shipping\nplus streaming",
-        "btn_label": "Join Prime"
+        "btn_label": "Join Prime",
+        "bg_external": ""
       }
     },
     "panels": {
