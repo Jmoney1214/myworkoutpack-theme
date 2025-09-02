@@ -155,6 +155,10 @@
     font-weight: 700;
     font-size: 1rem;
   }
+  /* Language and business links */
+  .amz-lang { display: inline-flex; align-items: center; gap: .25rem; font-weight: 700; }
+  .amz-business { color: #2ea3f2; font-weight: 700; white-space: nowrap; }
+  .amz-business:hover { text-decoration: underline; }
   
   .amz-nav {
       display: flex;
@@ -229,7 +233,8 @@
         {%- if section.settings.show_language and localization.available_languages.size > 0 -%}
           {%- assign current_lang = localization.language.iso_code | upcase -%}
           <a class="amz-util amz-lang" href="#" aria-label="Language">
-            {{ current_lang }} &#9662;
+            <span aria-hidden="true">🇺🇸</span>
+            <span>{{ current_lang }}</span> &#9662;
           </a>
         {%- endif -%}
         
@@ -237,7 +242,13 @@
           <a class="amz-util amz-account" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
             <span class="amz-two">
               <span class="amz-two__top">Hello, {% if customer %}{{ customer.first_name }}{% else %}sign in{% endif %}</span>
-              <span class="amz-two__bottom">{{ 'layout.customer.account' | t | default: 'Account & Lists' }}</span>
+              <span class="amz-two__bottom">
+                {% if customer and customer.default_address and customer.default_address.company != blank %}
+                  Account for {{ customer.default_address.company | truncate: 22 }}
+                {% else %}
+                  {{ 'layout.customer.account' | t | default: 'Account & Lists' }}
+                {% endif %}
+              </span>
             </span>
           </a>
         {%- endif -%}
@@ -251,6 +262,10 @@
           </a>
         {%- endif -%}
 
+        {%- if section.settings.show_lists -%}
+          <a class="amz-util amz-lists" href="{{ section.settings.lists_link | default: routes.account_url }}">Lists &#9662;</a>
+        {%- endif -%}
+
         {%- if section.settings.show_cart -%}
           <a class="amz-util amz-cart" href="{{ routes.cart_url }}">
             <span class="amz-cart__iconwrap">
@@ -261,6 +276,10 @@
             </span>
             <span>{{ 'layout.cart.title' | t | default: 'Cart' }}</span>
           </a>
+        {%- endif -%}
+
+        {%- if section.settings.show_business -%}
+          <a class="amz-util amz-business" href="{{ section.settings.business_link | default: '#' }}">{{ section.settings.business_text | default: 'Business Prime' }}</a>
         {%- endif -%}
       </div>
     </div>
@@ -325,6 +344,11 @@
     { "type": "checkbox", "id": "show_account", "label": "Show account link", "default": true },
     { "type": "checkbox", "id": "show_returns_orders", "label": "Show returns & orders link", "default": true },
     { "type": "checkbox", "id": "show_cart", "label": "Show cart link", "default": true },
+    { "type": "checkbox", "id": "show_lists", "label": "Show Lists link", "default": true },
+    { "type": "url", "id": "lists_link", "label": "Lists link URL" },
+    { "type": "checkbox", "id": "show_business", "label": "Show Business Prime link", "default": true },
+    { "type": "text", "id": "business_text", "label": "Business link text", "default": "Business Prime" },
+    { "type": "url", "id": "business_link", "label": "Business link URL" },
     { "type": "text", "id": "promo_text", "label": "Right promo text", "default": "Shop great deals now" }
   ],
   "presets": [{ "name": "Header (Amazon style)" }]
