@@ -1,12 +1,6 @@
 {
-  "name": "t:sections.header.name",
-  "type": "header",
-  "sections": {
-    "header-amz": {
-      "type": "header-amz"
-    }
-  },
-  "order": [
-    "header-amz"
-  ]
+  "name":"t:sections.header.name",
+  "type":"header",
+  "sections": { "header": { "type": "header" } },
+  "order": ["header"]
 }
