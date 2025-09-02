@@ -132,6 +132,17 @@
               <a href="{{ link.url }}">{{ link.title }}</a>
             {%- endfor -%}
           {%- endif -%}
+
+          {%- if section.settings.show_auto_collections -%}
+            {%- assign shown = 0 -%}
+            {%- for c in collections -%}
+              {%- if c != blank and c.all_products_count > 0 -%}
+                <a href="{{ c.url }}">{{ c.title }}</a>
+                {%- assign shown = shown | plus: 1 -%}
+                {%- if shown >= section.settings.collections_limit -%}{% break %}{%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
         </nav>
         {%- if section.settings.promo_text != blank -%}
           <div class="amz-promo">{{ section.settings.promo_text }}</div>
@@ -203,9 +214,11 @@
     },
     { "type": "checkbox", "id": "show_account", "label": "Show account", "default": true },
     { "type": "checkbox", "id": "show_returns_orders", "label": "Show returns & orders", "default": true },
-    { "type": "checkbox", "id": "show_cart", "label": "Show cart", "default": true }
+    { "type": "checkbox", "id": "show_cart", "label": "Show cart", "default": true },
+    { "type": "header", "content": "Auto Collections in Nav" },
+    { "type": "checkbox", "id": "show_auto_collections", "label": "Append collection titles automatically", "default": false },
+    { "type": "range", "id": "collections_limit", "label": "Collections to show", "min": 3, "max": 24, "step": 1, "default": 10 }
   ],
   "presets": [{ "name": "Header (Amazon style)" }]
 }
 {% endschema %}
-
