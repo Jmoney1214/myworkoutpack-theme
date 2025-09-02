@@ -1,6 +1,11 @@
 <style>
+  /* Increased specificity to avoid theme conflicts */
+  .amz-header-wrapper * {
+    box-sizing: border-box; /* Prevents padding/border issues */
+  }
+
   /* General Variables */
-  :root {
+  .amz-header-wrapper {
     --amz-color-primary: #131921;
     --amz-color-secondary: #232F3E;
     --amz-color-accent: #FEBD69;
@@ -11,13 +16,13 @@
   }
   
   /* Base Styles */
-  .amz-header {
+  .amz-header-wrapper .amz-header {
     background-color: var(--amz-color-primary);
     color: var(--amz-text-light);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   }
 
-  .amz-container {
+  .amz-header-wrapper .amz-container {
     display: flex;
     align-items: center;
     padding: 0 1rem;
@@ -26,51 +31,51 @@
   }
 
   /* Header Top Belt */
-  .amz-header__top {
+  .amz-header-wrapper .amz-header__top {
     height: 60px;
     padding: 5px 0;
   }
-  .amz-header__top .amz-container {
+  .amz-header-wrapper .amz-header__top .amz-container {
     gap: 1rem;
   }
   
   /* Logo */
-  .amz-logo {
+  .amz-header-wrapper .amz-logo {
     display: flex;
     align-items: center;
     padding: 0.5rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
   }
-  .amz-logo:hover {
+  .amz-header-wrapper .amz-logo:hover {
     border-color: var(--amz-text-light);
   }
-  .amz-logo img {
+  .amz-header-wrapper .amz-logo img {
     max-height: 40px;
   }
   
   /* Common "two-line" text style */
-  .amz-two {
+  .amz-header-wrapper .amz-two {
     display: none; /* Hidden on small screens */
   }
   @media(min-width: 768px) {
-    .amz-two {
+    .amz-header-wrapper .amz-two {
       display: flex;
       flex-direction: column;
       line-height: 1.2;
     }
-    .amz-two__top {
+    .amz-header-wrapper .amz-two__top {
       font-size: 0.75rem;
       color: #CCCCCC;
     }
-    .amz-two__bottom {
+    .amz-header-wrapper .amz-two__bottom {
       font-size: 0.875rem;
       font-weight: 700;
     }
   }
   
   /* Location */
-  .amz-location {
+  .amz-header-wrapper .amz-location {
     display: none; /* Hidden on mobile for simplicity */
     align-items: center;
     gap: 0.25rem;
@@ -80,24 +85,24 @@
     color: var(--amz-text-light);
     text-decoration: none;
   }
-  .amz-location:hover {
+  .amz-header-wrapper .amz-location:hover {
     border-color: var(--amz-text-light);
   }
   @media(min-width: 992px) {
-    .amz-location {
+    .amz-header-wrapper .amz-location {
       display: flex;
     }
   }
 
   /* Search Bar */
-  .amz-search {
+  .amz-header-wrapper .amz-search {
     flex-grow: 1;
     display: flex;
     height: 40px;
     border-radius: 0.375rem;
     overflow: hidden;
   }
-  .amz-search__select {
+  .amz-header-wrapper .amz-search__select {
     display: none;
     background-color: #f3f3f3;
     color: var(--amz-text-dark);
@@ -107,21 +112,22 @@
     border-right: 1px solid var(--amz-border-color);
   }
   @media(min-width: 768px) {
-    .amz-search__select {
+    .amz-header-wrapper .amz-search__select {
       display: flex;
     }
   }
-  .amz-search__input {
+  .amz-header-wrapper .amz-search__input {
     width: 100%;
     border: none;
     padding: 0 0.75rem;
     font-size: 1rem;
+    color: var(--amz-text-dark);
   }
-  .amz-search__input:focus {
+  .amz-header-wrapper .amz-search__input:focus {
     outline: 2px solid var(--amz-color-accent);
     outline-offset: -2px;
   }
-  .amz-search__button {
+  .amz-header-wrapper .amz-search__button {
     background-color: var(--amz-color-accent);
     border: none;
     padding: 0 0.75rem;
@@ -130,45 +136,45 @@
     align-items: center;
     justify-content: center;
   }
-  .amz-search__button:hover {
+  .amz-header-wrapper .amz-search__button:hover {
     background-color: var(--amz-color-accent-hover);
   }
 
   /* Utilities */
-  .amz-utils {
+  .amz-header-wrapper .amz-utils {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-  .amz-util {
+  .amz-header-wrapper .amz-util {
     padding: 0.5rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
     text-decoration: none;
     color: var(--amz-text-light);
   }
-  .amz-util:hover {
+  .amz-header-wrapper .amz-util:hover {
     border-color: var(--amz-text-light);
   }
-  .amz-account, .amz-returns {
+  .amz-header-wrapper .amz-account, .amz-header-wrapper .amz-returns {
     display: none; /* Hide on mobile */
   }
   @media(min-width: 768px) {
-    .amz-account, .amz-returns {
+    .amz-header-wrapper .amz-account, .amz-header-wrapper .amz-returns {
       display: block;
     }
   }
   
   /* Cart */
-  .amz-cart {
+  .amz-header-wrapper .amz-cart {
     display: flex;
     align-items: flex-end;
     gap: 0.25rem;
   }
-  .amz-cart__iconwrap {
+  .amz-header-wrapper .amz-cart__iconwrap {
     position: relative;
   }
-  .amz-cart__count {
+  .amz-header-wrapper .amz-cart__count {
     position: absolute;
     top: -5px;
     left: 50%;
@@ -177,11 +183,11 @@
     font-weight: 700;
     font-size: 1rem;
   }
-  .amz-cart span:last-child {
+  .amz-header-wrapper .amz-cart span:last-child {
     display: none;
   }
   @media(min-width: 768px) {
-    .amz-cart span:last-child {
+    .amz-header-wrapper .amz-cart span:last-child {
       display: inline;
       font-weight: 700;
       font-size: 0.875rem;
@@ -189,22 +195,22 @@
   }
   
   /* Header Nav Belt */
-  .amz-header__nav {
+  .amz-header-wrapper .amz-header__nav {
     background-color: var(--amz-color-secondary);
     min-height: 39px;
   }
-  .amz-header__nav .amz-container {
+  .amz-header-wrapper .amz-header__nav .amz-container {
     justify-content: space-between;
   }
   
-  .amz-nav {
+  .amz-header-wrapper .amz-nav {
     display: flex;
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
     padding: 0.5rem 0;
   }
-  .amz-nav a {
+  .amz-header-wrapper .amz-nav a {
     color: var(--amz-text-light);
     text-decoration: none;
     font-size: 0.875rem;
@@ -213,15 +219,15 @@
     border: 1px solid transparent;
     border-radius: 0.25rem;
   }
-  .amz-nav a:hover {
+  .amz-header-wrapper .amz-nav a:hover {
     border-color: var(--amz-text-light);
   }
   
-  .amz-promo {
+  .amz-header-wrapper .amz-promo {
     display: none; /* Hidden on mobile */
   }
   @media(min-width: 992px) {
-    .amz-promo {
+    .amz-header-wrapper .amz-promo {
       display: block;
       font-size: 0.875rem;
       font-weight: 700;
@@ -229,7 +235,7 @@
   }
 
   /* Visually Hidden */
-  .visually-hidden {
+  .amz-header-wrapper .visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -242,9 +248,10 @@
   }
 </style>
 
-<header class="amz-header">
-  <div class="amz-header__top">
-    <div class="amz-container">
+<div class="amz-header-wrapper">
+  <header class="amz-header">
+    <div class="amz-header__top">
+      <div class="amz-container">
       <a class="amz-logo" href="{{ routes.root_url }}">
         {%- if settings.logo != blank -%}
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
@@ -311,24 +318,24 @@
         {%- endif -%}
       </div>
     </div>
-  </div>
 
-  <div class="amz-header__nav">
-    <div class="amz-container">
-      <nav class="amz-nav" aria-label="Primary">
-        <a href="/collections/all">☰ All</a>
-        {%- if section.settings.menu != blank -%}
-          {%- for link in section.settings.menu.links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
+    <div class="amz-header__nav">
+      <div class="amz-container">
+        <nav class="amz-nav" aria-label="Primary">
+          <a href="/collections/all">☰ All</a>
+          {%- if section.settings.menu != blank -%}
+            {%- for link in section.settings.menu.links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          {%- endif -%}
+        </nav>
+        {%- if section.settings.promo_text != blank -%}
+          <div class="amz-promo">{{ section.settings.promo_text }}</div>
         {%- endif -%}
-      </nav>
-      {%- if section.settings.promo_text != blank -%}
-        <div class="amz-promo">{{ section.settings.promo_text }}</div>
-      {%- endif -%}
+      </div>
     </div>
-  </div>
-</header>
+  </header>
+</div>
 
 {% schema %}
 {
@@ -397,4 +404,3 @@
   "presets": [{ "name": "Header (Amazon style)" }]
 }
 {% endschema %}
-
