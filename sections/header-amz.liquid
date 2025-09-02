@@ -1,251 +1,47 @@
 <style>
-  /* Increased specificity to avoid theme conflicts */
-  .amz-header-wrapper * {
-    box-sizing: border-box; /* Prevents padding/border issues */
-  }
-
-  /* General Variables */
-  .amz-header-wrapper {
-    --amz-color-primary: #131921;
-    --amz-color-secondary: #232F3E;
-    --amz-color-accent: #FEBD69;
-    --amz-color-accent-hover: #F3A847;
-    --amz-border-color: #CDCDCD;
-    --amz-text-light: #FFFFFF;
-    --amz-text-dark: #0F1111;
-  }
-  
-  /* Base Styles */
-  .amz-header-wrapper .amz-header {
-    background-color: var(--amz-color-primary);
-    color: var(--amz-text-light);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  }
-
-  .amz-header-wrapper .amz-container {
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-    max-width: 1500px;
-    margin: 0 auto;
-  }
-
-  /* Header Top Belt */
-  .amz-header-wrapper .amz-header__top {
-    height: 60px;
-    padding: 5px 0;
-  }
-  .amz-header-wrapper .amz-header__top .amz-container {
-    gap: 1rem;
-  }
-  
-  /* Logo */
-  .amz-header-wrapper .amz-logo {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-  }
-  .amz-header-wrapper .amz-logo:hover {
-    border-color: var(--amz-text-light);
-  }
-  .amz-header-wrapper .amz-logo img {
-    max-height: 40px;
-  }
-  
-  /* Common "two-line" text style */
-  .amz-header-wrapper .amz-two {
-    display: none; /* Hidden on small screens */
-  }
-  @media(min-width: 768px) {
-    .amz-header-wrapper .amz-two {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-    .amz-header-wrapper .amz-two__top {
-      font-size: 0.75rem;
-      color: #CCCCCC;
-    }
-    .amz-header-wrapper .amz-two__bottom {
-      font-size: 0.875rem;
-      font-weight: 700;
-    }
-  }
-  
-  /* Location */
-  .amz-header-wrapper .amz-location {
-    display: none; /* Hidden on mobile for simplicity */
-    align-items: center;
-    gap: 0.25rem;
-    padding: 0.5rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    color: var(--amz-text-light);
-    text-decoration: none;
-  }
-  .amz-header-wrapper .amz-location:hover {
-    border-color: var(--amz-text-light);
-  }
-  @media(min-width: 992px) {
-    .amz-header-wrapper .amz-location {
-      display: flex;
-    }
-  }
-
-  /* Search Bar */
-  .amz-header-wrapper .amz-search {
-    flex-grow: 1;
-    display: flex;
-    height: 40px;
-    border-radius: 0.375rem;
-    overflow: hidden;
-  }
-  .amz-header-wrapper .amz-search__select {
-    display: none;
-    background-color: #f3f3f3;
-    color: var(--amz-text-dark);
-    padding: 0 0.75rem;
-    align-items: center;
-    font-size: 0.75rem;
-    border-right: 1px solid var(--amz-border-color);
-  }
-  @media(min-width: 768px) {
-    .amz-header-wrapper .amz-search__select {
-      display: flex;
-    }
-  }
-  .amz-header-wrapper .amz-search__input {
-    width: 100%;
-    border: none;
-    padding: 0 0.75rem;
-    font-size: 1rem;
-    color: var(--amz-text-dark);
-  }
-  .amz-header-wrapper .amz-search__input:focus {
-    outline: 2px solid var(--amz-color-accent);
-    outline-offset: -2px;
-  }
-  .amz-header-wrapper .amz-search__button {
-    background-color: var(--amz-color-accent);
-    border: none;
-    padding: 0 0.75rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .amz-header-wrapper .amz-search__button:hover {
-    background-color: var(--amz-color-accent-hover);
-  }
-
-  /* Utilities */
-  .amz-header-wrapper .amz-utils {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .amz-header-wrapper .amz-util {
-    padding: 0.5rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    color: var(--amz-text-light);
-  }
-  .amz-header-wrapper .amz-util:hover {
-    border-color: var(--amz-text-light);
-  }
-  .amz-header-wrapper .amz-account, .amz-header-wrapper .amz-returns {
-    display: none; /* Hide on mobile */
-  }
-  @media(min-width: 768px) {
-    .amz-header-wrapper .amz-account, .amz-header-wrapper .amz-returns {
-      display: block;
-    }
-  }
-  
-  /* Cart */
-  .amz-header-wrapper .amz-cart {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.25rem;
-  }
-  .amz-header-wrapper .amz-cart__iconwrap {
-    position: relative;
-  }
-  .amz-header-wrapper .amz-cart__count {
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--amz-color-accent);
-    font-weight: 700;
-    font-size: 1rem;
-  }
-  .amz-header-wrapper .amz-cart span:last-child {
-    display: none;
-  }
-  @media(min-width: 768px) {
-    .amz-header-wrapper .amz-cart span:last-child {
-      display: inline;
-      font-weight: 700;
-      font-size: 0.875rem;
-    }
-  }
-  
-  /* Header Nav Belt */
-  .amz-header-wrapper .amz-header__nav {
-    background-color: var(--amz-color-secondary);
-    min-height: 39px;
-  }
-  .amz-header-wrapper .amz-header__nav .amz-container {
-    justify-content: space-between;
-  }
-  
-  .amz-header-wrapper .amz-nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding: 0.5rem 0;
-  }
-  .amz-header-wrapper .amz-nav a {
-    color: var(--amz-text-light);
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-  }
-  .amz-header-wrapper .amz-nav a:hover {
-    border-color: var(--amz-text-light);
-  }
-  
-  .amz-header-wrapper .amz-promo {
-    display: none; /* Hidden on mobile */
-  }
-  @media(min-width: 992px) {
-    .amz-header-wrapper .amz-promo {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 700;
-    }
-  }
-
-  /* Visually Hidden */
-  .amz-header-wrapper .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
+.amz-header-wrapper *{box-sizing:border-box}
+.amz-header-wrapper{--top:#131921;--mid:#232F3E;--accent:#FEBD69;--accentH:#F3A847;--ink:#0F1111;--txt:#fff;--w:1500px}
+.amz-header-wrapper .amz-header{background:var(--top);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.amz-header-wrapper .amz-container{display:flex;align-items:center;padding:6px 16px;max-width:var(--w);margin:0 auto}
+.amz-header-wrapper .amz-header__top{min-height:60px}
+.amz-header-wrapper .amz-header__top .amz-container{gap:16px}
+.amz-header-wrapper .amz-logo{display:flex;align-items:center;padding:.5rem;border:1px solid transparent;border-radius:6px;color:#fff;text-decoration:none}
+.amz-header-wrapper .amz-logo:hover{border-color:#fff}
+.amz-header-wrapper .amz-logo img{max-height:40px}
+.amz-header-wrapper .amz-two{display:none}
+@media(min-width:768px){
+  .amz-header-wrapper .amz-two{display:flex;flex-direction:column;line-height:1.2}
+  .amz-header-wrapper .amz-two__top{font-size:12px;color:#ccc}
+  .amz-header-wrapper .amz-two__bottom{font-size:14px;font-weight:700}
+}
+.amz-header-wrapper .amz-location{display:none;align-items:center;gap:6px;padding:.5rem;border:1px solid transparent;border-radius:6px;color:#fff;text-decoration:none}
+.amz-header-wrapper .amz-location:hover{border-color:#fff}
+@media(min-width:992px){.amz-header-wrapper .amz-location{display:flex}}
+.amz-header-wrapper .amz-search{flex:1;display:flex;height:44px;border-radius:6px;overflow:hidden}
+.amz-header-wrapper .amz-search__select{display:none;background:#f3f3f3;color:#111;padding:0 .75rem;align-items:center;font-size:12px;border-right:1px solid #CDCDCD}
+@media(min-width:768px){.amz-header-wrapper .amz-search__select{display:flex}}
+.amz-header-wrapper .amz-search__input{flex:1;border:0;padding:0 .75rem;font-size:16px;color:#111}
+.amz-header-wrapper .amz-search__input:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.amz-header-wrapper .amz-search__button{background:var(--accent);border:0;padding:0 .75rem;display:flex;align-items:center;justify-content:center;min-width:44px;cursor:pointer}
+.amz-header-wrapper .amz-search__button:hover{background:var(--accentH)}
+.amz-header-wrapper .amz-utils{display:flex;align-items:center;gap:16px;margin-left:8px}
+.amz-header-wrapper .amz-util{padding:.5rem;border:1px solid transparent;border-radius:6px;color:#fff;text-decoration:none}
+.amz-header-wrapper .amz-util:hover{border-color:#fff}
+.amz-header-wrapper .amz-account,.amz-header-wrapper .amz-returns{display:none}
+@media(min-width:768px){.amz-header-wrapper .amz-account,.amz-header-wrapper .amz-returns{display:block}}
+.amz-header-wrapper .amz-cart{display:flex;align-items:flex-end;gap:4px}
+.amz-header-wrapper .amz-cart__iconwrap{position:relative}
+.amz-header-wrapper .amz-cart__count{position:absolute;top:-6px;left:50%;transform:translateX(-50%);color:var(--accent);font-weight:700;font-size:16px}
+.amz-header-wrapper .amz-cart span:last-child{display:none}
+@media(min-width:768px){.amz-header-wrapper .amz-cart span:last-child{display:inline;font-weight:700;font-size:14px}}
+.amz-header-wrapper .amz-header__nav{background:var(--mid);min-height:39px}
+.amz-header-wrapper .amz-header__nav .amz-container{justify-content:space-between}
+.amz-header-wrapper .amz-nav{display:flex;align-items:center;gap:16px;flex-wrap:nowrap;overflow:auto;padding:.5rem 0}
+.amz-header-wrapper .amz-nav a{color:#fff;text-decoration:none;font-size:14px;font-weight:600;padding:.25rem .5rem;border:1px solid transparent;border-radius:4px;white-space:nowrap}
+.amz-header-wrapper .amz-nav a:hover{border-color:#fff}
+.amz-header-wrapper .amz-promo{display:none;color:#fff}
+@media(min-width:992px){.amz-header-wrapper .amz-promo{display:block;font-size:14px;font-weight:700}}
+.amz-header-wrapper .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 
 <div class="amz-header-wrapper">
@@ -289,6 +85,13 @@
         </form>
 
         <div class="amz-utils">
+          {%- if localization.available_languages.size > 0 -%}
+            {%- assign current_lang = localization.language.iso_code | upcase -%}
+            <a class="amz-util amz-lang" href="#" aria-label="Language">
+              <span aria-hidden="true">🇺🇸</span>
+              <span>{{ current_lang }}</span>
+            </a>
+          {%- endif -%}
           {%- if section.settings.show_account -%}
             <a class="amz-util amz-account" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
               <span class="amz-two">
@@ -308,7 +111,7 @@
           {%- endif -%}
 
           {%- if section.settings.show_cart -%}
-            <a class="amz-util amz-cart" href="{{ routes.cart_url }}">
+            <a class="amz-util amz-cart" href="{{ routes.cart_url }}" aria-label="Cart">
               <span class="amz-cart__iconwrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                 <span class="amz-cart__count">{{ cart.item_count }}</span>
