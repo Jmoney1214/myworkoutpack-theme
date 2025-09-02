@@ -25,18 +25,21 @@
   .amz-header-wrapper .amz-container {
     display: flex;
     align-items: center;
-    padding: 0 1rem;
-    max-width: 1500px;
+    padding: 0 16px;
+    max-width: 1280px;
     margin: 0 auto;
+    gap: 24px;
   }
 
   /* Header Top Belt */
   .amz-header-wrapper .amz-header__top {
-    height: 60px;
-    padding: 6px 0;
+    height: 72px;
+    padding: 0;
+    display: flex;
+    align-items: center;
   }
   .amz-header-wrapper .amz-header__top .amz-container {
-    gap: 1rem;
+    gap: 24px;
   }
   
   /* Logo */
@@ -65,12 +68,15 @@
       line-height: 1.2;
     }
     .amz-header-wrapper .amz-two__top {
-      font-size: 0.75rem;
-      color: #CCCCCC;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
     }
     .amz-header-wrapper .amz-two__bottom {
-      font-size: 0.875rem;
-      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 600;
     }
   }
   
@@ -216,7 +222,10 @@
   /* Header Nav Belt */
   .amz-header-wrapper .amz-header__nav {
     background-color: var(--amz-color-secondary);
-    min-height: 39px;
+    height: 40px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
   }
   .amz-header-wrapper .amz-header__nav .amz-container {
     justify-content: space-between;
@@ -232,11 +241,12 @@
   .amz-header-wrapper .amz-nav a {
     color: var(--amz-text-light);
     text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    padding: 8px 12px;
     border: 1px solid transparent;
-    border-radius: 0.25rem;
+    border-radius: 4px;
   }
   .amz-header-wrapper .amz-nav a:hover {
     border-color: var(--amz-text-light);
