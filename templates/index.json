@@ -1,79 +1,18 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero-banner-amz",
-      "settings": {
-        "heading": "New Arrivals Are Here!",
-        "subcopy": "Shop the latest trends and styles.",
-        "cta_text": "Shop Now"
-      }
+    "hero": { "type": "hero-prime", "settings": {} },
+    "usp": {
+      "type": "usp-bar",
+      "settings": {},
+      "blocks": { "u1": { "type": "usp" }, "u2": { "type": "usp" }, "u3": { "type": "usp" }, "u4": { "type": "usp" } },
+      "block_order": ["u1","u2","u3","u4"]
     },
-    "grid1": {
-      "type": "product-grid-4col",
-      "settings": {
-        "title": "Trending Now",
-        "limit": 8
-      }
-    },
-    "deals": {
-      "type": "deals-carousel-amz",
-      "settings": {
-        "title": "Today's Deals",
-        "countdown_text": "Ends in: 04:32:11"
-      },
-      "blocks": {
-        "deal-1": {
-          "type": "deal",
-          "settings": {
-            "badge": "Up to 30% off",
-            "title": "Product for Deal"
-          }
-        },
-        "deal-2": {
-          "type": "deal",
-          "settings": {
-            "badge": "Limited time offer",
-            "title": "Another great product"
-          }
-        },
-        "deal-3": {
-          "type": "deal",
-          "settings": {
-            "badge": "Save big!",
-            "title": "Deal of the day"
-          }
-        },
-        "deal-4": {
-          "type": "deal",
-          "settings": {
-            "badge": "Flash sale",
-            "title": "Cool gadget"
-          }
-        }
-      },
-      "block_order": [
-        "deal-1",
-        "deal-2",
-        "deal-3",
-        "deal-4"
-      ]
-    },
-    "banner": {
-      "type": "full-width-banner-amz"
-    },
-    "grid2": {
-      "type": "product-grid-4col",
-      "settings": {
-        "title": "You might also like...",
-        "limit": 8
-      }
+    "bundles": {
+      "type": "bundle-offers",
+      "settings": {},
+      "blocks": { "b1": { "type": "bundle" }, "b2": { "type": "bundle" }, "b3": { "type": "bundle" } },
+      "block_order": ["b1","b2","b3"]
     }
   },
-  "order": [
-    "banner",
-    "deals",
-    "grid1",
-    "grid2",
-    "hero"
-  ]
+  "order": ["hero","usp","bundles"]
 }
