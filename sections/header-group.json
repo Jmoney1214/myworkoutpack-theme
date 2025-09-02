@@ -11,12 +11,12 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "header-amz": {
-      "type": "header-amz",
+    "header": {
+      "type": "header",
       "settings": {}
     }
   },
   "order": [
-    "header-amz"
+    "header"
   ]
 }
