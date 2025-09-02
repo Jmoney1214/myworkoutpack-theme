@@ -31,9 +31,11 @@ p{font-size:16px;line-height:1.65;color:var(--muted);margin:0 0 14px}
 .hero-wrap{position:relative;padding:0 0 40px;background:transparent}
 .hero__bg{position:absolute;inset:0;background-position:center;background-size:cover;opacity:1}
 .hero-wrap::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:120px;background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--amazon-page) 85%);z-index:1;pointer-events:none}
+.hero__fade{position:absolute;left:0;right:0;bottom:-1px;height:140px;z-index:2;pointer-events:none;background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--amazon-page) 85%)}
 .hero__in{position:relative;z-index:2}
 /* Ensure no gap between header and first hero */
 .amz-header-wrapper + main, .amz-header + main { margin-top: 0 !important; }
+body.template-index #MainContent { margin-top: 0 !important; padding-top: 0 !important; }
 .hero__bullets{margin:14px 0 22px}
 .hero__bullets li{list-style:none;display:flex;gap:10px;align-items:center;margin:6px 0;color:var(--ink)}
 .hero__dot{width:10px;height:10px;border-radius:50%;background:var(--brand)}
