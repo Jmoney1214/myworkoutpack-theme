@@ -9,24 +9,79 @@
  */
 {
   "sections": {
-    "hero": {
-      "type": "hero-prime",
+    "hero_banner_amz_fbBxCC": {
+      "type": "hero-banner-amz",
+      "name": "Hero (Amazon style)",
       "settings": {
-        "heading": "Fast, free shipping\nplus streaming",
-        "btn_label": "Join Prime",
-        "bg_external": ""
+        "image": "shopify://shop_images/Pickleball_ContestBanner_050423.png",
+        "heading": "",
+        "subcopy": "",
+        "cta_text": "Shop Now",
+        "cta_link": ""
       }
     },
     "panels": {
       "type": "category-panels-amz",
       "blocks": {
-        "p1": { "type": "panel", "settings": { "heading": "Trending: Fall Beauty", "cta_label": "Shop more beauty" } },
-        "p2": { "type": "panel", "settings": { "heading": "Discover Everyday Essentials", "cta_label": "Shop more everyday essentials" } },
-        "p3": { "type": "panel", "settings": { "heading": "Shop gift cards under $50", "cta_label": "Shop gift cards" } }
+        "p1": {
+          "type": "panel",
+          "settings": {
+            "heading": "Trending: Fall Beauty",
+            "cta_label": "Shop more beauty",
+            "cta_url": "",
+            "label_1": "Wellness",
+            "url_1": "",
+            "label_2": "Cleaning supplies",
+            "url_2": "",
+            "label_3": "Fall flavors",
+            "url_3": "",
+            "label_4": "All deals",
+            "url_4": ""
+          }
+        },
+        "p2": {
+          "type": "panel",
+          "settings": {
+            "heading": "Discover Everyday Essentials",
+            "cta_label": "Shop more everyday essentials",
+            "cta_url": "",
+            "label_1": "Wellness",
+            "url_1": "",
+            "label_2": "Cleaning supplies",
+            "url_2": "",
+            "label_3": "Fall flavors",
+            "url_3": "",
+            "label_4": "All deals",
+            "url_4": ""
+          }
+        },
+        "p3": {
+          "type": "panel",
+          "settings": {
+            "heading": "Shop gift cards under $50",
+            "cta_label": "Shop gift cards",
+            "cta_url": "",
+            "label_1": "Wellness",
+            "url_1": "",
+            "label_2": "Cleaning supplies",
+            "url_2": "",
+            "label_3": "Fall flavors",
+            "url_3": "",
+            "label_4": "All deals",
+            "url_4": ""
+          }
+        }
       },
-      "block_order": ["p1","p2","p3"],
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
       "settings": {}
     }
   },
-  "order": ["hero", "panels"]
+  "order": [
+    "hero_banner_amz_fbBxCC",
+    "panels"
+  ]
 }
