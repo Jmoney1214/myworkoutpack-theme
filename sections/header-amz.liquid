@@ -22,7 +22,14 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   }
 
-  .amz-header-wrapper .amz-container { display:flex; align-items:center; padding:0 16px; max-width:1280px; margin:0 auto; gap:24px; }
+  .amz-header-wrapper .amz-container {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 24px;
+  }
 
   /* Header Top Belt */
   .amz-header-wrapper .amz-header__top {
@@ -31,9 +38,13 @@
     display: flex;
     align-items: center;
   }
-  .amz-header-wrapper .amz-header__top .amz-container {
-    gap: 24px;
-  }
+  .amz-header-wrapper .amz-header__top .amz-container { gap: 24px; }
+  /* Three-zone layout */
+  .amz-header-wrapper .amz-top { display:flex; align-items:center; gap:24px; width:100%; height:72px; }
+  .amz-header-wrapper .amz-top__left { flex:0 0 360px; display:flex; align-items:center; gap:24px; min-width:0; }
+  .amz-header-wrapper .amz-top__search { flex:1 1 auto; min-width:0; }
+  .amz-header-wrapper .amz-top__right { flex:0 0 420px; display:flex; align-items:center; justify-content:flex-end; gap:24px; min-width:0; }
+  @media (max-width:1200px){ .amz-header-wrapper .amz-top__right{ gap:16px; flex-basis:380px; } }
   
   /* Logo */
   .amz-header-wrapper .amz-logo {
@@ -95,18 +106,29 @@
 
   /* Search Bar */
   .amz-header-wrapper .amz-search { width:100%; display:flex; align-items:center; height:48px; border-radius:8px; overflow:hidden; background:#fff; border:1px solid rgba(255,255,255,0.08); box-shadow:none; }
-  .amz-header-wrapper .amz-search__select { display:none; background:#e6e6e6; color:var(--amz-text-dark); padding:0 12px; align-items:center; font-size:14px; line-height:20px; font-weight:600; border-right:1px solid rgba(255,255,255,0.08); height:100%; width:72px; justify-content:center; }
-  @media(min-width: 768px) {
-    .amz-header-wrapper .amz-search__select {
-      display: inline-flex;
-    }
+  .amz-header-wrapper .amz-search__select {
+    display: none;
+    background-color: #e6e6e6;
+    color: var(--amz-text-dark);
+    padding: 0 12px;
+    align-items: center;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    height: 100%;
+    width: 72px;
+    justify-content: center;
   }
-  .amz-header-wrapper .amz-search__input { flex:1 1 auto; width:100%; border:none; padding:0 14px; font-size:16px; line-height:24px; color:var(--amz-text-dark); height:100%; }
-  .amz-header-wrapper .amz-search__input:focus {
-    outline: 2px solid var(--amz-color-accent);
-    outline-offset: -2px;
+  @media(min-width: 768px) {
+    .amz-header-wrapper .amz-search__select { display:inline-flex; }
+  }
+  .amz-header-wrapper .amz-search__input {
+    flex: 1 1 auto; width:100%; border:none; padding:0 14px; font-size:16px; line-height:24px; color:var(--amz-text-dark); height:100%;
   }
   .amz-header-wrapper .amz-search__button { background:var(--amz-color-accent); border:none; width:56px; cursor:pointer; display:flex; align-items:center; justify-content:center; height:100%; border-radius:0 8px 8px 0; }
+  /* Group focus outline */
+  .amz-header-wrapper .amz-search:focus-within{ outline:2px solid var(--amz-color-accent); outline-offset:2px; }
   .amz-header-wrapper .amz-search__button:hover {
     background-color: var(--amz-color-accent-hover);
   }
@@ -238,9 +260,7 @@
   <header class="amz-header">
     <div class="amz-header__top">
       <div class="amz-container">
-        <div class="amz-top">
-          <div class="amz-top__left">
-            <a class="amz-logo" href="{{ routes.root_url }}">
+        <a class="amz-logo" href="{{ routes.root_url }}">
           {%- if settings.logo != blank -%}
             {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
             {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
@@ -253,10 +273,10 @@
           {%- else -%}
             <span style="font-weight:800;font-size:1.5rem;">{{ shop.name }}</span>
           {%- endif -%}
-            </a>
+        </a>
 
-            {%- if section.settings.show_location -%}
-            <a class="amz-location" href="{{ section.settings.location_link | default: '#' }}">
+        {%- if section.settings.show_location -%}
+        <a class="amz-location" href="{{ section.settings.location_link | default: '#' }}">
           <div class="amz-location__icon" style="margin-top: 10px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
           </div>
@@ -264,22 +284,19 @@
             <span class="amz-two__top">{{ section.settings.location_label | default: 'Deliver to' }}</span>
             <span class="amz-two__bottom">{{ section.settings.location_value | default: 'United States' }}</span>
           </span>
-            </a>
-            {%- endif -%}
-          </div>
+        </a>
+        {%- endif -%}
 
-          <div class="amz-top__search">
-            <form class="amz-search" action="{{ routes.search_url }}" method="get" role="search">
+        <form class="amz-search" action="{{ routes.search_url }}" method="get" role="search">
           <label for="AmzSearchInput-{{ section.id }}" class="visually-hidden">{{ 'general.search.search' | t }}</label>
           <div class="amz-search__select" aria-hidden="true">All&nbsp;▾</div>
           <input id="AmzSearchInput-{{ section.id }}" class="amz-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | default: 'Search...' }}">
           <button class="amz-search__button" aria-label="{{ 'general.search.submit' | t }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </button>
-            </form>
-          </div>
+        </form>
 
-          <div class="amz-top__right amz-utils">
+        <div class="amz-utils">
           {%- if localization.available_languages.size > 0 -%}
             {%- assign current_lang = localization.language.iso_code | upcase -%}
             <a class="amz-util amz-lang" href="#" aria-label="Language">
@@ -314,7 +331,6 @@
               <span>Cart</span>
             </a>
           {%- endif -%}
-          </div>
         </div>
       </div>
     </div>
