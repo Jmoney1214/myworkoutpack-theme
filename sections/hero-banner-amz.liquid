@@ -1,5 +1,11 @@
 {{ 'amz.css' | asset_url | stylesheet_tag }}
-<section class="amz amz-hero" style="margin:32px 0">
+<style>
+  .hero-container--{{ section.id }}{position:relative}
+  .hero-container--{{ section.id }}::after{content:'';position:absolute;left:0;right:0;bottom:0;height:160px;pointer-events:none;background:linear-gradient(to bottom, rgba(0,0,0,0), var(--amazon-page))}
+  @media (max-width: 750px){.hero-container--{{ section.id }}::after{height:120px}}
+</style>
+<div class="hero-container--{{ section.id }}">
+<section class="amz amz-hero" style="margin:0 0 32px">
   {% if section.settings.image != blank %}
     {{ section.settings.image | image_url: width: 2400 | image_tag: class: '', loading: 'eager', widths: '800,1200,1600,2000' }}
   {% else %}
@@ -13,6 +19,7 @@
     {% endif %}
   </div>
 </section>
+</div>
 
 {% schema %}
 {
