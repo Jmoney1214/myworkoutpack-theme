@@ -33,7 +33,7 @@
   /* Header Top Belt */
   .amz-header-wrapper .amz-header__top {
     height: 60px;
-    padding: 5px 0;
+    padding: 6px 0;
   }
   .amz-header-wrapper .amz-header__top .amz-container {
     gap: 1rem;
@@ -96,32 +96,42 @@
 
   /* Search Bar */
   .amz-header-wrapper .amz-search {
-    flex-grow: 1;
+    flex: 1 1 640px;
+    max-width: 900px;
     display: flex;
-    height: 40px;
-    border-radius: 0.375rem;
+    align-items: center;
+    height: 44px;
+    background: #fff;
+    border-radius: 8px;
     overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    margin: 0 12px;
   }
   .amz-header-wrapper .amz-search__select {
     display: none;
-    background-color: #f3f3f3;
+    background-color: #e6e6e6;
     color: var(--amz-text-dark);
-    padding: 0 0.75rem;
+    padding: 0 12px;
     align-items: center;
-    font-size: 0.75rem;
-    border-right: 1px solid var(--amz-border-color);
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-right: 1px solid #d5d9d9;
+    height: 100%;
+    min-width: 92px;
   }
   @media(min-width: 768px) {
     .amz-header-wrapper .amz-search__select {
-      display: flex;
+      display: inline-flex;
     }
   }
   .amz-header-wrapper .amz-search__input {
+    flex: 1 1 auto;
     width: 100%;
     border: none;
-    padding: 0 0.75rem;
-    font-size: 1rem;
+    padding: 0 12px;
+    font-size: 15px;
     color: var(--amz-text-dark);
+    height: 100%;
   }
   .amz-header-wrapper .amz-search__input:focus {
     outline: 2px solid var(--amz-color-accent);
@@ -130,11 +140,13 @@
   .amz-header-wrapper .amz-search__button {
     background-color: var(--amz-color-accent);
     border: none;
-    padding: 0 0.75rem;
+    width: 52px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
+    border-radius: 0 8px 8px 0;
   }
   .amz-header-wrapper .amz-search__button:hover {
     background-color: var(--amz-color-accent-hover);
@@ -144,7 +156,7 @@
   .amz-header-wrapper .amz-utils {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 14px;
   }
   .amz-header-wrapper .amz-util {
     padding: 0.5rem;
@@ -176,12 +188,19 @@
   }
   .amz-header-wrapper .amz-cart__count {
     position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--amz-color-accent);
+    top: -6px;
+    right: -6px;
+    background: var(--amz-color-accent);
+    color: #111;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 12px;
+    padding: 0 4px;
   }
   .amz-header-wrapper .amz-cart span:last-child {
     display: none;
@@ -222,6 +241,13 @@
   .amz-header-wrapper .amz-nav a:hover {
     border-color: var(--amz-text-light);
   }
+
+  /* Location link emphasis */
+  .amz-header-wrapper .amz-two__bottom a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Language chip */
+  .amz-header-wrapper .amz-lang { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 2px; font-weight: 700; }
+  .amz-header-wrapper .amz-lang:hover { outline: 1px solid rgba(255,255,255,0.2); }
   
   .amz-header-wrapper .amz-promo {
     display: none; /* Hidden on mobile */
@@ -281,7 +307,7 @@
 
         <form class="amz-search" action="{{ routes.search_url }}" method="get" role="search">
           <label for="AmzSearchInput-{{ section.id }}" class="visually-hidden">{{ 'general.search.search' | t }}</label>
-          <div class="amz-search__select" aria-hidden="true">All</div>
+          <div class="amz-search__select" aria-hidden="true">All&nbsp;▾</div>
           <input id="AmzSearchInput-{{ section.id }}" class="amz-search__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | default: 'Search...' }}">
           <button class="amz-search__button" aria-label="{{ 'general.search.submit' | t }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F1111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -289,6 +315,13 @@
         </form>
 
         <div class="amz-utils">
+          {%- if localization.available_languages.size > 0 -%}
+            {%- assign current_lang = localization.language.iso_code | upcase -%}
+            <a class="amz-util amz-lang" href="#" aria-label="Language">
+              <span aria-hidden="true">🇺🇸</span>
+              <span>{{ current_lang }}</span>&nbsp;▾
+            </a>
+          {%- endif -%}
           {%- if section.settings.show_account -%}
             <a class="amz-util amz-account" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
               <span class="amz-two">
@@ -405,4 +438,3 @@
   "presets": [{ "name": "Header (Amazon style)" }]
 }
 {% endschema %}
-
