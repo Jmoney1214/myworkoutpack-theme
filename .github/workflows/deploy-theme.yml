@@ -35,9 +35,11 @@ jobs:
           SHOPIFY_FLAG_STORE: ${{ secrets.SHOPIFY_STORE }}     # e.g. echhtp-4a.myshopify.com
           SHOPIFY_CLI_TTY: 0
           SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
         run: |
           shopify theme push \
             --store "$SHOPIFY_FLAG_STORE" \
             --theme ${{ github.event.inputs.theme_id }} \
             --unpublished \
+            --password "$SHOPIFY_CLI_THEME_TOKEN" \
             --json
