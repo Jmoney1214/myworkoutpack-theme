@@ -2,7 +2,8 @@
 <style>
   .amz-panels--{{ section.id }}{
     position: relative;
-    z-index: 2; /* sit above hero fade */
+    z-index: 50; /* ensure above hero text/images */
+    isolation: isolate; /* create new stacking context */
     margin-top: {% if section.settings.overlap_hero %}-{{ section.settings.overlap_amount | default: 120 }}px{% else %}24px{% endif %};
   }
   @media (max-width: 750px){
