@@ -1,6 +1,7 @@
 name: Deploy Theme (Staging only)
 
 on:
+  # Manual trigger remains available
   workflow_dispatch:
     inputs:
       branch:
@@ -10,6 +11,10 @@ on:
       theme_id:
         description: "Target STAGING Theme ID (unpublished)"
         required: true
+  # Auto-deploy on pushes to staging
+  push:
+    branches:
+      - staging
 
 concurrency:
   group: theme-deploy-${{ github.ref }}
@@ -21,10 +26,16 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout
+      # For manual runs, checkout the provided branch; for push, default
+      - name: Checkout (manual)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.branch }}
+          ref: ${{ inputs.branch }}
+
+      - name: Checkout (push)
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+        uses: actions/checkout@v4
 
       - name: Install Shopify CLI
         run: |
@@ -32,14 +43,29 @@ jobs:
 
       - name: Push to STAGING theme
         env:
-          SHOPIFY_FLAG_STORE: ${{ secrets.SHOPIFY_STORE }}     # e.g. echhtp-4a.myshopify.com
-          SHOPIFY_CLI_TTY: 0
+          # Required secrets (set in repo settings):
+          SHOPIFY_FLAG_STORE: ${{ secrets.SHOPIFY_STORE }}     # e.g. store-name.myshopify.com
           SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+          # Optional secret used for auto-deploy on push
+          STAGING_THEME_ID: ${{ secrets.SHOPIFY_STAGING_THEME_ID }}
+          # Provided when run manually
+          INPUT_THEME_ID: ${{ inputs.theme_id }}
+          SHOPIFY_CLI_TTY: 0
         run: |
+          set -euo pipefail
+          THEME_ID="${INPUT_THEME_ID:-}"
+          if [[ -z "$THEME_ID" ]]; then
+            THEME_ID="${STAGING_THEME_ID:-}"
+          fi
+          if [[ -z "$THEME_ID" ]]; then
+            echo "Error: Theme ID not provided. Set input 'theme_id' (manual) or secret SHOPIFY_STAGING_THEME_ID (push)." >&2
+            exit 1
+          fi
+
           shopify theme push \
             --store "$SHOPIFY_FLAG_STORE" \
-            --theme ${{ github.event.inputs.theme_id }} \
+            --theme "$THEME_ID" \
             --unpublished \
             --password "$SHOPIFY_CLI_THEME_TOKEN" \
             --json
