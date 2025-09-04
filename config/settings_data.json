@@ -191,6 +191,13 @@
           "settings": {
             "color_scheme": "scheme-1"
           }
+        },
+        "header": {
+          "type": "header",
+          "blocks": [],
+          "settings": {
+            "show_quick_links": true
+          }
         }
       }
     }
