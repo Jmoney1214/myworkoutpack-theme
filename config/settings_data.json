@@ -194,7 +194,8 @@
         },
         "header": {
           "type": "header",
-          "blocks": [],
+          "blocks": {},
+          "block_order": [],
           "settings": {
             "show_quick_links": true
           }
