@@ -1,39 +1,43 @@
-name: Deploy theme to Shopify (staging)
+name: Deploy Theme (Staging only)
+
 on:
-  push:
-    branches: [ "dev" ]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Git branch to deploy"
+        default: "staging"
+        required: true
+      theme_id:
+        description: "Target STAGING Theme ID (unpublished)"
+        required: true
+
+concurrency:
+  group: theme-deploy-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
-      - name: Detect changed theme files
-        id: diff
+      - name: Install Shopify CLI
         run: |
-          echo "files<<EOF" >> $GITHUB_OUTPUT
-          git diff --name-only HEAD^ HEAD -- \
-            "assets/**" "layout/**" "sections/**" "snippets/**" "templates/**" "config/**" \
-            | sed '/^$/d' >> $GITHUB_OUTPUT || true
-          echo "EOF" >> $GITHUB_OUTPUT
+          npm i -g @shopify/cli @shopify/theme
 
-      - name: Upload changed files to Shopify
-        if: ${{ steps.diff.outputs.files != '' }}
+      - name: Push to STAGING theme
         env:
-          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
-          SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
-          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
-          SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
+          SHOPIFY_FLAG_STORE: ${{ secrets.SHOPIFY_STORE }}     # e.g. echhtp-4a.myshopify.com
+          SHOPIFY_CLI_TTY: 0
+          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
         run: |
-          while IFS= read -r file; do
-            [ -f "$file" ] || continue
-            echo "Uploading $file"
-            json=$(jq -Rs . < "$file")
-            curl -sS -X PUT \
-              -H "X-Shopify-Access-Token: $SHOPIFY_ADMIN_TOKEN" \
-              -H "Content-Type: application/json" \
-              "https://$SHOPIFY_STORE/admin/api/${SHOPIFY_API_VERSION}/themes/${SHOPIFY_THEME_ID}/assets.json" \
-              -d "{\"asset\":{\"key\":\"$file\",\"value\":$json}}" \
-            | jq -r '.errors // "ok"'
-          done <<< "${{ steps.diff.outputs.files }}"
+          shopify theme push \
+            --store "$SHOPIFY_FLAG_STORE" \
+            --theme ${{ github.event.inputs.theme_id }} \
+            --unpublished \
+            --json
