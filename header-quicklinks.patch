@@ -1,0 +1,62 @@
+diff --git a/sections/header.liquid b/sections/header.liquid
+index 1234567..89abcde 100644
+--- a/sections/header.liquid
++++ b/sections/header.liquid
+@@ -70,6 +70,34 @@
+   }
+ 
+   .list-menu__item--link { padding: 10px 0 !important; }
+-  summary.list-menu__item { padding-right: 2.7rem; }
++  summary.list-menu__item { padding-right: 2.2rem; }
++
++  /* Quick-links row */
++  .mw-quicklinks {
++    border-top: 0;
++    margin-top: 0.25rem;
++  }
++  .mw-quicklinks__list {
++    gap: 24px;
++    align-items: center;
++    font-weight: 500;
++    line-height: 1;
++  }
++  .mw-quicklinks__link {
++    display: inline-flex;
++    align-items: center;
++    padding: 10px 0;
++    text-decoration: none;
++  }
++  .mw-quicklinks__link:hover,
++  .mw-quicklinks__link:focus {
++    text-decoration: underline;
++  }
++  .mw-quicklinks .list-menu__link--accent { font-weight: 600; }
++
++  /* Hide duplicate nav if it renders twice */
++  nav.mw-quicklinks:first-of-type { display: none; }
++
+ </style>
+ 
+ {%- style -%}
+@@ -180,6 +208,19 @@
+          elsif section.settings.menu_type_desktop != 'drawer'
+            render 'header-mega-menu'
+          endif
++       endif
++
++       <!-- Quick Links Bar -->
++       <nav class="mw-quicklinks" role="navigation" aria-label="Quick links">
++         <ul class="mw-quicklinks__list list-menu list-menu--inline">
++           <li><a class="mw-quicklinks__link list-menu__item--link" href="/collections/new">New Arrivals</a></li>
++           <li><a class="mw-quicklinks__link list-menu__item--link" href="/collections/best-sellers">Best Sellers</a></li>
++           <li><a class="mw-quicklinks__link list-menu__item--link" href="/collections/sale">Today’s Deals</a></li>
++           <li><a class="mw-quicklinks__link list-menu__item--link" href="/collections/bundles">Bundles & Packs</a></li>
++           <li><a class="mw-quicklinks__link list-menu__item--link" href="/pages/subscribe-save">Subscribe & Save</a></li>
++           <li><a class="mw-quicklinks__link list-menu__item--link" href="/products/gift-card">Gift Cards</a></li>
++           <li><a class="mw-quicklinks__link list-menu__link--accent list-menu__item--link" href="/collections/clearance">Clearance</a></li>
++         </ul>
++       </nav>
+        endif
+      endif
+     %}
+
