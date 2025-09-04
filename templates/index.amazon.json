@@ -72,7 +72,7 @@
         "p3": { "type": "panel", "settings": {} }
       },
       "block_order": ["p1","p2","p3"],
-      "settings": {"overlap_hero": true, "overlap_amount": 240, "overlap_amount_mobile": 160}
+      "settings": {"overlap_hero": true, "overlap_amount": 200, "overlap_amount_mobile": 140}
     }
   },
   "order": [
