@@ -23,6 +23,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: staging
     permissions:
       contents: read
     steps:
