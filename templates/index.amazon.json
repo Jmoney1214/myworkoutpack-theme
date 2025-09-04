@@ -63,11 +63,22 @@
         "b3"
       ],
       "settings": {}
+    },
+    "panels": {
+      "type": "category-panels-amz",
+      "blocks": {
+        "p1": { "type": "panel", "settings": {} },
+        "p2": { "type": "panel", "settings": {} },
+        "p3": { "type": "panel", "settings": {} }
+      },
+      "block_order": ["p1","p2","p3"],
+      "settings": {"overlap_hero": true, "overlap_amount": 240, "overlap_amount_mobile": 160}
     }
   },
   "order": [
     "hero",
     "usp",
+    "panels",
     "bundles"
   ]
 }
