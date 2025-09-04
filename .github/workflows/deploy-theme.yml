@@ -67,6 +67,5 @@ jobs:
           shopify theme push \
             --store "$SHOPIFY_FLAG_STORE" \
             --theme "$THEME_ID" \
-            --unpublished \
             --password "$SHOPIFY_CLI_THEME_TOKEN" \
             --json

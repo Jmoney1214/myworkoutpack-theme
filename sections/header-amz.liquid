@@ -128,22 +128,11 @@
       <div class="amz-container">
         <nav class="amz-nav" aria-label="Primary">
           <a href="/collections/all">☰ All</a>
-          {%- if section.settings.menu != blank -%}
-            {%- for link in section.settings.menu.links -%}
-              <a href="{{ link.url }}">{{ link.title }}</a>
-            {%- endfor -%}
-          {%- endif -%}
-
-          {%- if section.settings.show_auto_collections -%}
-            {%- assign shown = 0 -%}
-            {%- for c in collections -%}
-              {%- if c != blank and c.all_products_count > 0 -%}
-                <a href="{{ c.url }}">{{ c.title }}</a>
-                {%- assign shown = shown | plus: 1 -%}
-                {%- if shown >= section.settings.collections_limit -%}{% break %}{%- endif -%}
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endif -%}
+          <a href="/collections/health">HEALTH</a>
+          <a href="/collections/beauty">BEAUTY</a>
+          <a href="/collections/clothing">CLOTHING</a>
+          <a href="/collections/electronics">ELECTRONICS</a>
+          <a href="/collections/this-weeks-deals">SHOP THIS WEEKS DEALS</a>
         </nav>
         {%- if section.settings.show_promo and section.settings.promo_text != blank -%}
           <div class="amz-promo">{{ section.settings.promo_text }}</div>
