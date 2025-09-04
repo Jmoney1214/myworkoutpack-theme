@@ -43,10 +43,10 @@ jobs:
 
       - name: Push to STAGING theme
         env:
-          # Required secrets (set in repo settings):
+          # Required settings for CI auth with Shopify CLI
           SHOPIFY_FLAG_STORE: ${{ secrets.SHOPIFY_STORE }}     # e.g. store-name.myshopify.com
-          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
-          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+          SHOPIFY_CLI_AUTH_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+          SHOPIFY_API_VERSION: ${{ secrets.SHOPIFY_API_VERSION }}
           # Optional secret used for auto-deploy on push
           STAGING_THEME_ID: ${{ secrets.SHOPIFY_STAGING_THEME_ID }}
           # Provided when run manually
@@ -67,5 +67,4 @@ jobs:
             --store "$SHOPIFY_FLAG_STORE" \
             --theme "$THEME_ID" \
             --unpublished \
-            --password "$SHOPIFY_CLI_THEME_TOKEN" \
             --json
