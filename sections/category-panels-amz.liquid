@@ -59,6 +59,20 @@
               </div>
             {%- endfor -%}
 
+          {%- elsif collections['all'] and collections['all'].all_products_count > 0 -%}
+            {%- for prod in collections['all'].products limit: 4 -%}
+              <div class="amz-panel-tile">
+                <a href="{{ prod.url }}">
+                  {%- if prod.featured_image -%}
+                    {{ prod.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: prod.featured_image.alt | default: prod.title, class: '' }}
+                  {%- else -%}
+                    <img src="https://placehold.co/300x180/f0f0f0/111?text=Item" alt="">
+                  {%- endif -%}
+                  <div class="caption">{{ prod.title }}</div>
+                </a>
+              </div>
+            {%- endfor -%}
+
           {%- else -%}
             {%- for i in (1..4) -%}
               {%- capture img -%}img_{{ i }}{%- endcapture -%}
