@@ -4,10 +4,11 @@
     position: relative;
     z-index: 50; /* ensure above hero text/images */
     isolation: isolate; /* create new stacking context */
-    margin-top: {% if section.settings.overlap_hero %}-{{ section.settings.overlap_amount | default: 120 }}px{% else %}24px{% endif %};
+    /* Overlap hero by a fixed negative margin when enabled */
+    margin-top: {% if section.settings.overlap_hero %}-{{ section.settings.overlap_amount | default: 48 }}px{% else %}var(--amz-section-v-d){% endif %};
   }
   @media (max-width: 750px){
-    .amz-panels--{{ section.id }}{ margin-top: {% if section.settings.overlap_hero %}-{{ section.settings.overlap_amount_mobile | default: 96 }}px{% else %}16px{% endif %}; }
+    .amz-panels--{{ section.id }}{ margin-top: {% if section.settings.overlap_hero %}-{{ section.settings.overlap_amount_mobile | default: 48 }}px{% else %}var(--amz-section-v-m){% endif %}; }
   }
 </style>
 <section class="amz amz-panels amz-panels--{{ section.id }}">
@@ -82,8 +83,8 @@
   "max_blocks": 4,
   "settings": [
     { "type": "checkbox", "id": "overlap_hero", "label": "Overlap previous banner", "default": true },
-    { "type": "range", "id": "overlap_amount", "label": "Overlap amount (desktop, px)", "min": 40, "max": 360, "step": 4, "default": 200 },
-    { "type": "range", "id": "overlap_amount_mobile", "label": "Overlap amount (mobile, px)", "min": 20, "max": 280, "step": 4, "default": 140 }
+    { "type": "range", "id": "overlap_amount", "label": "Overlap amount (desktop, px)", "min": 0, "max": 360, "step": 4, "default": 48 },
+    { "type": "range", "id": "overlap_amount_mobile", "label": "Overlap amount (mobile, px)", "min": 0, "max": 280, "step": 4, "default": 48 }
   ],
   "presets": [
     {

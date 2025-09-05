@@ -6,9 +6,10 @@
   @media (max-width: 750px){.hero-container--{{ section.id }}::after{height:120px}}
 </style>
 <div class="hero-container--{{ section.id }}">
-<section class="amz amz-hero" style="margin:0 0 32px">
+<section class="amz amz-hero" style="margin:0 0 var(--amz-section-v-d)">
   {% if section.settings.image != blank %}
-    {{ section.settings.image | image_url: width: 2400 | image_tag: class: '', loading: 'eager', widths: '800,1200,1600,2000' }}
+    <link rel="preload" as="image" href="{{ section.settings.image | image_url: width: 2000 }}">
+    {{ section.settings.image | image_url: width: 2400 | image_tag: class: '', loading: 'eager', widths: '800,1200,1600,2000', fetchpriority: 'high' }}
   {% else %}
     <img src="https://placehold.co/1200x500/F0A800/FFFFFF?text=Main+Hero+Banner" alt="Hero">
   {% endif %}
