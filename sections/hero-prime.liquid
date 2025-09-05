@@ -1,4 +1,7 @@
-<section class="hero-wrap">
+<style>
+  .hero-wrap--{{ section.id }}{ --hero-focus-y: {{ section.settings.focus_y | default: 30 }}%; }
+</style>
+<section class="hero-wrap hero-wrap--{{ section.id }}">
   {% liquid
     assign bg_url = ''
     if section.settings.bg != blank
@@ -21,9 +24,14 @@
         {% endif %}{% endfor %}
       </ul>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        {% if section.settings.btn_label and section.settings.btn_link %}<a class="btn" href="{{ section.settings.btn_link }}">{{ section.settings.btn_label }}</a>{% endif %}
+        {% assign primary_label = section.settings.btn_label | default: 'Shop Pickleball Sets Now' %}
+        {% assign primary_link = section.settings.btn_link | default: routes.collections_url %}
+        <a class="btn" href="{{ primary_link }}" aria-label="{{ primary_label }}">{{ primary_label }}</a>
         {% if section.settings.btn2_label and section.settings.btn2_link %}<a class="btn btn--outline" href="{{ section.settings.btn2_link }}">{{ section.settings.btn2_label }}</a>{% endif %}
       </div>
+      {% if section.settings.rules_label and section.settings.rules_link %}
+        <p class="upsell"><a href="{{ section.settings.rules_link }}" style="color:var(--brand);text-decoration:underline;text-underline-offset:2px">{{ section.settings.rules_label }}</a></p>
+      {% endif %}
       {% if section.settings.upsell %}<p class="upsell">{{ section.settings.upsell }}</p>{% endif %}
     </div>
     <div>{% if section.settings.side_img %}{{ section.settings.side_img | image_url: width: 1200 | image_tag: loading: 'lazy', style: 'border-radius:14px' }}{% endif %}</div>
@@ -38,13 +46,16 @@
     {"id":"bg_external","type":"url","label":"Background image (external URL)","info":"Optional: paste an external image URL to use instead of the picker."},
     {"id":"side_img","type":"image_picker","label":"Right image"},
     {"id":"kicker","type":"text","label":"Kicker","default":"New • Pickleball • Pro"},
-    {"id":"heading","type":"text","label":"Heading","default":"Start Your Pickleball Journey Today"},
-    {"id":"subheading","type":"textarea","label":"Subheadline","default":"Bundles, paddles, and gear trusted by players nationwide. Save more, play better."},
-    {"id":"btn_label","type":"text","label":"Primary button label","default":"Shop Best Sellers"},
+    {"id":"heading","type":"text","label":"Heading","default":"Serve. Set. Score."},
+    {"id":"subheading","type":"textarea","label":"Subheadline","default":"Enter to win. See details."},
+    {"id":"btn_label","type":"text","label":"Primary button label","default":"Shop Pickleball Sets Now"},
     {"id":"btn_link","type":"url","label":"Primary button link"},
     {"id":"btn2_label","type":"text","label":"Secondary button label","default":"Build a Bundle & Save"},
     {"id":"btn2_link","type":"url","label":"Secondary button link"},
-    {"id":"upsell","type":"text","label":"Small reassurance note","default":"Free shipping over $50 · 30-day returns"}
+    {"id":"upsell","type":"text","label":"Small reassurance note","default":"Free shipping over $50 · 30-day returns"},
+    {"id":"focus_y","type":"range","label":"Image vertical focus (%)","min":0,"max":100,"step":1,"default":30},
+    {"id":"rules_label","type":"text","label":"Rules link label","default":"Details"},
+    {"id":"rules_link","type":"url","label":"Rules link URL"}
   ],
   "blocks":[
     {"type":"bullet","name":"Bullet","settings":[{"id":"text","type":"text","label":"Bullet text","default":"Free Shipping over $50"}]}

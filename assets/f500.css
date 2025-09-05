@@ -28,8 +28,8 @@ p{font-size:16px;line-height:1.65;color:var(--muted);margin:0 0 14px}
 .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
 .card__in{padding:14px}
-.hero-wrap{position:relative;padding:0 0 40px;background:transparent}
-.hero__bg{position:absolute;inset:0;background-position:center;background-size:cover;opacity:1}
+.hero-wrap{position:relative;padding:0 0 40px;background:transparent;min-height:clamp(450px,60vh,560px);max-height:60vh;overflow:hidden}
+.hero__bg{position:absolute;inset:0;background-position:center var(--hero-focus-y, 30%);background-size:cover;opacity:1}
 .hero-wrap::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:120px;background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--amazon-page) 85%);z-index:1;pointer-events:none}
 .hero__fade{position:absolute;left:0;right:0;bottom:-1px;height:140px;z-index:1;pointer-events:none;background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--amazon-page) 85%)}
 .hero__in{position:relative;z-index:2}
@@ -40,6 +40,7 @@ body.template-index #MainContent { margin-top: 0 !important; padding-top: 0 !imp
 .hero__bullets{margin:14px 0 22px}
 .hero__bullets li{list-style:none;display:flex;gap:10px;align-items:center;margin:6px 0;color:var(--ink)}
 .hero__dot{width:10px;height:10px;border-radius:50%;background:var(--brand)}
+.hero-wrap p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:60ch}
 .upsell{margin-top:8px;border:1px dashed var(--border);border-radius:12px;padding:10px 12px;background:#fcfffa}
 .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .product-card img{width:100%;height:auto;display:block}
