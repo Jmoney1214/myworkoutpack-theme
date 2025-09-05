@@ -140,3 +140,12 @@ body{
 @media(max-width:990px){
   .header__search-inline{ display:none }
 }
+
+/* Newsletter/email block polish */
+.email-signup-banner.section{ padding-top:64px; padding-bottom:64px }
+@media(max-width:1023px){ .email-signup-banner.section{ padding-top:48px; padding-bottom:48px } }
+@media(max-width:639px){ .email-signup-banner.section{ padding-top:40px; padding-bottom:40px } }
+.email-signup-banner .banner__content .content-container{ max-width:1200px; margin:0 auto }
+.email-signup-banner .newsletter-form__field-wrapper{ max-width:480px; margin: 0 auto }
+.email-signup-banner .field__input{ font-size:16px }
+.email-signup-banner .field__button{ font-size:16px }

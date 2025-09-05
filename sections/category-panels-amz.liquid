@@ -20,26 +20,67 @@
         {% endif %}
 
         <div class="amz-panel-grid">
-          {% for i in (1..4) %}
-            {% capture img %}img_{{ i }}{% endcapture %}
-            {% capture label %}label_{{ i }}{% endcapture %}
-            {% capture url %}url_{{ i }}{% endcapture %}
-            <div class="amz-panel-tile">
-              {% assign imgv = block.settings[img] %}
-              {% assign labelv = block.settings[label] %}
-              {% assign urlv = block.settings[url] %}
-              <a href="{{ urlv | default: '#' }}">
-                {% if imgv != blank %}
-                  {{ imgv | image_url: width: 600 | image_tag: loading: 'lazy', class: '' }}
-                {% else %}
-                  <img src="https://placehold.co/300x180/f0f0f0/111?text=Item" alt="">
-                {% endif %}
-                {% if labelv != blank %}
-                  <div class="caption">{{ labelv }}</div>
-                {% endif %}
-              </a>
-            </div>
-          {% endfor %}
+          {%- liquid
+            assign has_products = false
+            if block.settings.product_1 or block.settings.product_2 or block.settings.product_3 or block.settings.product_4
+              assign has_products = true
+            endif
+          -%}
+
+          {%- if has_products -%}
+            {%- for i in (1..4) -%}
+              {%- capture pkey -%}product_{{ i }}{%- endcapture -%}
+              {%- assign prod = block.settings[pkey] -%}
+              {%- if prod != blank -%}
+              <div class="amz-panel-tile">
+                <a href="{{ prod.url }}">
+                  {%- if prod.featured_image -%}
+                    {{ prod.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: prod.featured_image.alt | default: prod.title, class: '' }}
+                  {%- else -%}
+                    <img src="https://placehold.co/300x180/f0f0f0/111?text=Item" alt="">
+                  {%- endif -%}
+                  <div class="caption">{{ prod.title }}</div>
+                </a>
+              </div>
+              {%- endif -%}
+            {%- endfor -%}
+
+          {%- elsif block.settings.collection != blank -%}
+            {%- for prod in block.settings.collection.products limit: 4 -%}
+              <div class="amz-panel-tile">
+                <a href="{{ prod.url }}">
+                  {%- if prod.featured_image -%}
+                    {{ prod.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: prod.featured_image.alt | default: prod.title, class: '' }}
+                  {%- else -%}
+                    <img src="https://placehold.co/300x180/f0f0f0/111?text=Item" alt="">
+                  {%- endif -%}
+                  <div class="caption">{{ prod.title }}</div>
+                </a>
+              </div>
+            {%- endfor -%}
+
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              {%- capture img -%}img_{{ i }}{%- endcapture -%}
+              {%- capture label -%}label_{{ i }}{%- endcapture -%}
+              {%- capture url -%}url_{{ i }}{%- endcapture -%}
+              <div class="amz-panel-tile">
+                {%- assign imgv = block.settings[img] -%}
+                {%- assign labelv = block.settings[label] -%}
+                {%- assign urlv = block.settings[url] -%}
+                <a href="{{ urlv | default: '#' }}">
+                  {%- if imgv != blank -%}
+                    {{ imgv | image_url: width: 600 | image_tag: loading: 'lazy', class: '' }}
+                  {%- else -%}
+                    <img src="https://placehold.co/300x180/f0f0f0/111?text=Item" alt="">
+                  {%- endif -%}
+                  {%- if labelv != blank -%}
+                    <div class="caption">{{ labelv }}</div>
+                  {%- endif -%}
+                </a>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
         </div>
 
         {% if block.settings.cta_label != blank %}
@@ -58,23 +99,28 @@
       "type": "panel",
       "name": "Panel",
       "settings": [
+        { "type": "collection", "id": "collection", "label": "Source collection (optional)" },
+        { "type": "product", "id": "product_1", "label": "Product 1 (optional)" },
+        { "type": "product", "id": "product_2", "label": "Product 2 (optional)" },
+        { "type": "product", "id": "product_3", "label": "Product 3 (optional)" },
+        { "type": "product", "id": "product_4", "label": "Product 4 (optional)" },
         { "type": "text", "id": "heading", "label": "Heading", "default": "Discover Everyday Essentials" },
         { "type": "text", "id": "cta_label", "label": "Bottom link label", "default": "Shop more" },
         { "type": "url", "id": "cta_url", "label": "Bottom link URL" },
         
-        { "type": "image_picker", "id": "img_1", "label": "Tile 1 image" },
+        { "type": "image_picker", "id": "img_1", "label": "Tile 1 image (fallback)" },
         { "type": "text", "id": "label_1", "label": "Tile 1 label", "default": "Wellness" },
         { "type": "url", "id": "url_1", "label": "Tile 1 link" },
 
-        { "type": "image_picker", "id": "img_2", "label": "Tile 2 image" },
+        { "type": "image_picker", "id": "img_2", "label": "Tile 2 image (fallback)" },
         { "type": "text", "id": "label_2", "label": "Tile 2 label", "default": "Cleaning supplies" },
         { "type": "url", "id": "url_2", "label": "Tile 2 link" },
 
-        { "type": "image_picker", "id": "img_3", "label": "Tile 3 image" },
+        { "type": "image_picker", "id": "img_3", "label": "Tile 3 image (fallback)" },
         { "type": "text", "id": "label_3", "label": "Tile 3 label", "default": "Fall flavors" },
         { "type": "url", "id": "url_3", "label": "Tile 3 link" },
 
-        { "type": "image_picker", "id": "img_4", "label": "Tile 4 image" },
+        { "type": "image_picker", "id": "img_4", "label": "Tile 4 image (fallback)" },
         { "type": "text", "id": "label_4", "label": "Tile 4 label", "default": "All deals" },
         { "type": "url", "id": "url_4", "label": "Tile 4 link" }
       ]

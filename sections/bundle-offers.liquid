@@ -1,26 +1,58 @@
-<section class="section">
-  <div class="page-width">
-    <h2>{{ section.settings.heading }}</h2>
-    <div class="grid-3">
-      {% for block in section.blocks %}{% if block.type == 'bundle' %}
-      <a class="card" href="{{ block.settings.link | default: '#' }}">
-        {% if block.settings.image %}{{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}
+{{ 'amz.css' | asset_url | stylesheet_tag }}
+<style>
+  .amz-bundles{padding-top:var(--amz-section-v-d);padding-bottom:var(--amz-section-v-d)}
+  @media(max-width:1023px){.amz-bundles{padding-top:var(--amz-section-v-t);padding-bottom:var(--amz-section-v-t)}}
+  @media(max-width:639px){.amz-bundles{padding-top:var(--amz-section-v-m);padding-bottom:var(--amz-section-v-m)}}
+  .amz-bundles .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:var(--amz-max-width);margin:0 auto;padding:0 var(--amz-gutter-d)}
+  @media(max-width:1023px){.amz-bundles .row{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:0 var(--amz-gutter-t)}}
+  @media(max-width:639px){.amz-bundles .row{grid-template-columns:1fr;gap:12px;padding:0 var(--amz-gutter-m)}}
+  .amz-bundles .card{display:block;background:#fff;border:1px solid var(--amz-border);border-radius:12px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  .amz-bundles .card__in{padding:24px}
+  @media(max-width:1023px){.amz-bundles .card__in{padding:20px}}
+  @media(max-width:639px){.amz-bundles .card__in{padding:16px}}
+  .amz-bundles h2{max-width:var(--amz-max-width);margin:0 auto 16px;padding:0 var(--amz-gutter-d);font:800 32px/1.25 Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  .amz-bundles .title{font-weight:800;font-size:28px;line-height:1.25;margin:0 0 6px}
+  @media(max-width:1023px){.amz-bundles .title{font-size:24px}}
+  @media(max-width:639px){.amz-bundles .title{font-size:20px}}
+  .amz-bundles .cta{display:inline-block;margin-top:18px;color:var(--amz-accent);font-weight:700;text-decoration:none;white-space:nowrap}
+  .amz-bundles .cta:hover{text-decoration:underline;text-underline-offset:2px}
+</style>
+
+<section class="amz-bundles">
+  <h2>{{ section.settings.heading }}</h2>
+  <div class="row">
+    {% for block in section.blocks %}{% if block.type == 'bundle' %}
+      {% assign p = block.settings.product %}
+      {% assign href = block.settings.link | default: (p.url | default: '#') %}
+      <a class="card" href="{{ href }}">
+        {% if p != blank and p.featured_image %}
+          {{ p.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: p.featured_image.alt | default: p.title }}
+        {% elsif block.settings.image %}
+          {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+        {% endif %}
         <div class="card__in">
-          <h3>{{ block.settings.title }}</h3>
-          <p class="upsell">{{ block.settings.caption }}</p>
-          <span class="btn btn--outline">Shop This Bundle</span>
+          <h3 class="title">{{ p.title | default: block.settings.title }}</h3>
+          {% if p != blank %}
+            <p class="upsell">{{ block.settings.caption | default: p.vendor }}</p>
+          {% else %}
+            <p class="upsell">{{ block.settings.caption }}</p>
+          {% endif %}
+          <span class="cta">{{ section.settings.cta_label | default: 'Shop This Bundle' }}</span>
         </div>
       </a>
-      {% endif %}{% endfor %}
-    </div>
+    {% endif %}{% endfor %}
   </div>
 </section>
 {% schema %}
 {
   "name":"Bundle Offers",
-  "settings":[{"id":"heading","type":"text","label":"Heading","default":"Pickleball Bundles — Save up to 20%"}],
+  "settings":[
+    {"id":"heading","type":"text","label":"Heading","default":"Pickleball Bundles — Save up to 20%"},
+    {"id":"cta_label","type":"text","label":"CTA label","default":"Shop This Bundle"}
+  ],
   "blocks":[
     {"type":"bundle","name":"Bundle","settings":[
+      {"id":"product","type":"product","label":"Product (optional)"},
       {"id":"image","type":"image_picker","label":"Image"},
       {"id":"title","type":"text","label":"Title","default":"Starter Bundle"},
       {"id":"caption","type":"text","label":"Caption","default":"Everything to begin. Save 15%."},
