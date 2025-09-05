@@ -16,8 +16,8 @@
   <div class="page-width hero__in grid-2">
     <div>
       {% if section.settings.kicker %}<span class="badge">{{ section.settings.kicker }}</span>{% endif %}
-      <h1>{{ section.settings.heading }}</h1>
-      {% if section.settings.subheading %}<p>{{ section.settings.subheading }}</p>{% endif %}
+      {% if section.settings.show_heading %}<h1>{{ section.settings.heading }}</h1>{% endif %}
+      {% if section.settings.show_subheading and section.settings.subheading %}<p>{{ section.settings.subheading }}</p>{% endif %}
       <ul class="hero__bullets">
         {% for block in section.blocks %}{% if block.type == 'bullet' %}
         <li><span class="hero__dot"></span><span>{{ block.settings.text }}</span></li>
@@ -46,7 +46,9 @@
     {"id":"bg_external","type":"url","label":"Background image (external URL)","info":"Optional: paste an external image URL to use instead of the picker."},
     {"id":"side_img","type":"image_picker","label":"Right image"},
     {"id":"kicker","type":"text","label":"Kicker","default":"New • Pickleball • Pro"},
+    {"id":"show_heading","type":"checkbox","label":"Show heading","default":false},
     {"id":"heading","type":"text","label":"Heading","default":"Serve. Set. Score."},
+    {"id":"show_subheading","type":"checkbox","label":"Show subheading","default":false},
     {"id":"subheading","type":"textarea","label":"Subheadline","default":"Enter to win. See details."},
     {"id":"btn_label","type":"text","label":"Primary button label","default":"Shop Pickleball Sets Now"},
     {"id":"btn_link","type":"url","label":"Primary button link"},
