@@ -20,14 +20,18 @@
         "location_link": "",
         "search_placeholder": "Search...",
         "menu": "",
+        "show_promo": false,
         "promo_text": "Shop great deals now",
         "show_account": true,
         "show_returns_orders": true,
-        "show_cart": true
+        "show_cart": true,
+        "show_auto_collections": true,
+        "collections_limit": 10
       }
     },
     "full_width_banner_amz_ByJGAQ": {
       "type": "full-width-banner-amz",
+      "custom_css": [],
       "name": "Full-width Banner",
       "settings": {
         "image": "shopify://shop_images/Pickleball_ContestBanner_050423.png"
